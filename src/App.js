@@ -1,8 +1,16 @@
+import Header from "./components/Header";
+import Nav from "./components/Nav";
+import Main from "./components/Main";
+import Footer from "./components/Footer";
 function App() {
   return (
-    <div className="App">
-      <h2>little lemon restaurant</h2>
-    </div>
+    <>
+      <Header>
+        <Nav></Nav>
+      </Header>
+      <Main></Main>
+      <Footer></Footer>
+    </>
   );
 }
 
