@@ -1,0 +1,57 @@
+.callToAction {
+  background-color: var(--color-primary-1);
+  padding: 8rem 30rem;
+  color: var(--color-text-2);
+  display: flex;
+  justify-content: space-between;
+
+  &__title {
+    color: var(--color-accent);
+    font-family: var(--font-Markazi);
+    font-size: 6.4rem;
+    text-transform: capitalize;
+    line-height: 0.7;
+    font-weight: 500;
+  }
+  &__subTitle {
+    font-family: var(--font-Markazi);
+    font-size: 3.2rem;
+    text-transform: capitalize;
+    font-weight: 400;
+  }
+
+  &__content {
+    width: 50%;
+  }
+  &__text {
+    font-size: 1.8rem;
+    line-height: 1.4;
+    margin-top: 2rem;
+    font-weight: 400;
+  }
+  &__btn {
+    margin-top: 4rem;
+    background-color: var(--color-accent);
+    border: none;
+    outline: none;
+    font-family: inherit;
+    text-transform: capitalize;
+    font-weight: 700;
+    color: var(--color-text-1);
+    padding: 1rem 2rem;
+    border-radius: 0.6rem;
+    font-size: 1.6rem;
+  }
+  &__image {
+    width: 38rem;
+    position: relative;
+    img {
+      width: 100%;
+      height: 45rem;
+      object-fit: cover;
+      position: absolute;
+      right: 0;
+      border-radius: 0.6rem;
+    }
+  }
+}
