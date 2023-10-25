@@ -1,0 +1,35 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+}
+
+:root {
+  --color-primary-1: #495e57; //hero
+  --color-primary-2: #edefee; //special items
+  --color-primary-3: #f0f0f0; //footer
+
+  --color-text-1: #333333; //on light bg
+  --color-text-2: #edefee; //on dark bg
+  --color-accent: #f4ce14;
+
+  --font-karla: "Karla", sans-serif; //body text
+  --font-Markazi: "Markazi Text", serif; //headings
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: var(--font-karla);
+  font-size: 1.6rem;
+  height: 100vh;
+  max-width: 140rem;
+  margin: 0 auto;
+  padding: 0 30rem;
+}
+
+img {
+  width: 20rem;
+}
