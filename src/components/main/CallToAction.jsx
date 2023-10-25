@@ -1,6 +1,7 @@
 import React from "react";
 import classes from "./CallToAction.module.scss";
 import heroImage from "../../assets/little-lemon-assets/restauranfood.jpg";
+import PrimaryButton from "../ui/PrimaryButton";
 
 function CallToAction() {
   return (
@@ -15,9 +16,7 @@ function CallToAction() {
           familiar and exciting.
         </p>
 
-        <button className={classes["callToAction__btn"]}>
-          reserve a table
-        </button>
+        <PrimaryButton>reserve a table</PrimaryButton>
       </div>
       <div className={classes["callToAction__image"]}>
         <img src={heroImage} alt="" />

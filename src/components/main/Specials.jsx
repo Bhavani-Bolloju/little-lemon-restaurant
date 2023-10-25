@@ -3,18 +3,27 @@ import classes from "./Specials.module.scss";
 import greekSalad from "../../assets/little-lemon-assets/greek salad.jpg";
 import brushetta from "../../assets/little-lemon-assets/bruchetta.png";
 import lemonDessert from "../../assets/little-lemon-assets/lemon dessert.jpg";
+import PrimaryButton from "../ui/PrimaryButton";
+
+import icon from "../../assets/little-lemon-assets/Delivery-iconsvg.svg";
 
 const SpecialItem = function ({ image, title, price, text, id }) {
   return (
     <li className={classes["specials__item"]}>
-      <img src={image} alt={title} />
-      <p>greek salad</p>
-      <p>$ 12.4</p>
-      <p>{text}</p>
-      <button>
-        <span>order to delivery</span>
-        <span>logo</span>
-      </button>
+      <div className={classes["specials__item--image"]}>
+        <img src={image} alt={title} />
+      </div>
+      <div className={classes["specials__item--content"]}>
+        <div className={classes["specials__item--content-info"]}>
+          <p className={classes["specials__item--title"]}>greek salad</p>
+          <p className={classes["specials__item--price"]}>{price}</p>
+        </div>
+        <p className={classes["specials__item--text"]}>{text}</p>
+        <button className={classes["specials__item--btn"]}>
+          <span>order to delivery</span>
+          <img src={icon} alt="delivery icon" />
+        </button>
+      </div>
     </li>
   );
 };
@@ -22,8 +31,8 @@ const SpecialItem = function ({ image, title, price, text, id }) {
 function Specials() {
   return (
     <section className={classes.specials}>
-      <h2 className={classes["specials__title"]}>This weeks special</h2>
-      <button className={classes["specials__order-btn"]}>online menu</button>
+      <h2 className={classes["specials__title"]}>This weeks special!</h2>
+      <PrimaryButton>online menu</PrimaryButton>
       <ul className={classes["specials__list"]}>
         <SpecialItem
           title="greek salad"
