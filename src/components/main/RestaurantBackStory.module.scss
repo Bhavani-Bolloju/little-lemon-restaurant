@@ -1,0 +1,62 @@
+.restaurantBackStory {
+  padding: 10rem 30rem;
+  display: flex;
+  color: var(--color-text-1);
+  gap: 5rem;
+  padding-bottom: 20rem;
+
+  &__content {
+    flex-basis: 45%;
+    flex-grow: 1;
+  }
+
+  &__images {
+    // background-color: red;
+    align-self: stretch;
+    position: relative;
+    // flex-grow: 1;
+    flex-basis: 50%;
+  }
+}
+
+.content__title {
+  font-family: var(--font-Markazi);
+  font-size: 4.8rem;
+  text-transform: capitalize;
+  font-weight: 500;
+  line-height: 0.8;
+}
+.content__location {
+  font-family: var(--font-Markazi);
+  font-size: 2.8rem;
+  font-weight: 400;
+}
+.content__description {
+  font-family: var(--font-karla);
+  line-height: 1.4;
+  margin-top: 2rem;
+  font-size: 1.8rem;
+}
+
+.image__restaurant {
+  position: absolute;
+  width: 50%;
+  height: 100%;
+  z-index: 100;
+  object-fit: cover;
+  top: 30%;
+  left: 10%;
+  border-radius: 1rem;
+  box-shadow: 0 5px 20px 10px rgba(0, 0, 0, 0.08);
+}
+.image__chefs {
+  position: absolute;
+  width: 50%;
+  height: 100%;
+  z-index: 100;
+  right: 0;
+  object-fit: cover;
+  z-index: 50;
+  border-radius: 1rem;
+  box-shadow: 0 5px 20px 10px rgba(0, 0, 0, 0.08);
+}
