@@ -9,4 +9,10 @@
   padding: 1rem 2rem;
   border-radius: 1rem;
   font-size: 1.6rem;
+  transition: opacity 0.1s;
+
+  &:hover {
+    cursor: pointer;
+    opacity: 0.9;
+  }
 }

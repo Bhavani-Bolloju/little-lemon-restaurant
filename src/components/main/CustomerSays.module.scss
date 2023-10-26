@@ -1,0 +1,74 @@
+.customerSays {
+  background-color: var(--color-primary-1);
+  padding: 10rem 30rem;
+
+  &__heading {
+    text-align: center;
+    text-transform: capitalize;
+    font-family: var(--font-Markazi);
+    font-size: 4.8rem;
+    color: var(--color-accent);
+    margin-bottom: 4rem;
+  }
+  &__list {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+  }
+  &__item {
+    flex-grow: 1;
+    width: 20%;
+    background-color: var(--color-primary-4);
+    padding: 3rem 2rem;
+    border-radius: 1.6rem;
+  }
+  &__quote {
+  }
+  &__figure {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  &__avatar {
+    width: 4.5rem;
+    height: 4.5rem;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  &__caption {
+    display: flex;
+    flex-direction: column;
+    font-size: 1.4rem;
+    text-transform: capitalize;
+  }
+  &__name {
+    font-weight: 700;
+  }
+  &__profession {
+    font-size: 1.2rem;
+    font-weight: 400;
+  }
+  &__rating {
+    margin: 1rem 0;
+    display: flex;
+    gap: 0.2rem;
+    list-style: none;
+    padding: 0;
+    color: var(--color-primary-1);
+
+    svg {
+      width: 1.2rem;
+      fill: none;
+      stroke: currentColor;
+    }
+    .filledStar {
+      fill: var(--color-accent);
+      stroke: var(--color-accent);
+    }
+  }
+  &__review {
+    font-size: 1.4rem;
+    line-height: 1.3;
+  }
+}
