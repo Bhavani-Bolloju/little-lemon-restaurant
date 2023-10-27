@@ -2,8 +2,10 @@ import React from "react";
 import classes from "./CallToAction.module.scss";
 import heroImage from "../../assets/little-lemon-assets/restauranfood.jpg";
 import PrimaryButton from "../ui/PrimaryButton";
+import { useNavigate } from "react-router-dom";
 
 function CallToAction() {
+  const navigate = useNavigate();
   return (
     <section className={classes.callToAction}>
       <div className={classes["callToAction__content"]}>
@@ -16,7 +18,9 @@ function CallToAction() {
           familiar and exciting.
         </p>
 
-        <PrimaryButton>reserve a table</PrimaryButton>
+        <PrimaryButton onClick={() => navigate("/booking")}>
+          reserve a table
+        </PrimaryButton>
       </div>
       <div className={classes["callToAction__image"]}>
         <img src={heroImage} alt="" />
