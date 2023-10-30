@@ -1,7 +1,9 @@
 import React from "react";
 import classes from "./RestaurantBackStory.module.scss";
-import restaurant from "../../assets/little-lemon-assets/restaurant.jpg";
-import chefs from "../../assets/little-lemon-assets/restaurant chef B.jpg";
+// import restaurant from "../../assets/little-lemon-assets/restaurant.jpg";
+import chef1 from "../../assets/little-lemon-assets/Mario and Adrian A.jpg";
+
+import chef2 from "../../assets/little-lemon-assets/Mario and Adrian b.jpg";
 
 function RestaurantBackStory() {
   return (
@@ -19,8 +21,8 @@ function RestaurantBackStory() {
         </p>
       </div>
       <div className={classes["restaurantBackStory__images"]}>
-        <img src={restaurant} alt="" className={classes["image__restaurant"]} />
-        <img src={chefs} alt="" className={classes["image__chefs"]} />
+        <img src={chef1} alt="" className={classes["image__restaurant"]} />
+        <img src={chef2} alt="" className={classes["image__chefs"]} />
       </div>
     </section>
   );

@@ -1,0 +1,54 @@
+.bookingForm {
+  color: var(--color-text-2);
+  flex-basis: 80%;
+
+  h2 {
+    font-size: 4rem;
+    color: var(--color-accent);
+    flex-grow: 1;
+    flex-basis: 100%;
+    line-height: normal;
+    margin-bottom: 3rem;
+    text-transform: capitalize;
+    letter-spacing: 0.5;
+  }
+
+  &__container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 3rem;
+    row-gap: 3rem;
+  }
+
+  button {
+    grid-column: 2 span;
+    text-wrap: nowrap;
+    justify-self: start;
+    margin-top: 3rem;
+  }
+}
+
+.input__controls {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+
+  label {
+    text-transform: capitalize;
+    font-size: 1.8rem;
+  }
+
+  input,
+  select,
+  input::placeholder {
+    border-radius: 0.5rem;
+    outline: none;
+    border: none;
+    padding: 0.8rem 1rem;
+    color: var(--color-text-1);
+    font-family: var(--font-karla);
+    font-weight: 500;
+    font-size: 1.6rem;
+    background-color: var(--color-primary-2);
+  }
+}
