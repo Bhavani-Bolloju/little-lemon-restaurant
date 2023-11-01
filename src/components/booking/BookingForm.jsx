@@ -1,17 +1,19 @@
 import React, { useState } from "react";
 import classes from "./BookingForm.module.scss";
 import PrimaryButton from "../ui/PrimaryButton";
+import { useNavigate } from "react-router-dom";
 
 function BookingForm({ availableTimes, onTimeChange }) {
   const [bookTable, setBookTable] = useState({
     date: "",
-    time: availableTimes[0],
+    time: "",
     guests: 1,
     occassion: "birthday"
   });
 
+  const navigate = useNavigate();
+
   const inputHandler = function (e) {
-    // console.log(e.target.name, e.target.value);
     setBookTable((prev) => {
       return { ...prev, [e.target.name]: e.target.value };
     });
@@ -19,14 +21,36 @@ function BookingForm({ availableTimes, onTimeChange }) {
 
   const formSubmitHandler = function (e) {
     e.preventDefault();
-    onTimeChange(bookTable.date, bookTable.time);
+    if (
+      bookTable.date.trim() == "" ||
+      bookTable.time.trim() == "" ||
+      bookTable.guests.trim() == "" ||
+      bookTable.occassion.trim() == ""
+    ) {
+      return;
+    }
 
-    // console.log(availableTimes, bookTable);
+    console.log("done");
+
+    // setBookTable({
+    //   date: "",
+    //   time: availableTimes[0],
+    //   guests: 1,
+    //   occassion: "birthday"
+    // });
+
+    navigate("/bookingConfirm");
   };
 
   return (
     <form className={classes.bookingForm} onSubmit={formSubmitHandler}>
-      <h2>Reserve a table</h2>
+      <h2
+        role="heading"
+        aria-level="2"
+        className={classes["bookingForm__title"]}
+      >
+        Reserve a table
+      </h2>
       <div className={classes["bookingForm__container"]}>
         <div className={classes["input__controls"]}>
           <label htmlFor="">choose date</label>
@@ -35,11 +59,13 @@ function BookingForm({ availableTimes, onTimeChange }) {
             name="date"
             onChange={inputHandler}
             value={bookTable.date}
+            required
           />
         </div>
         <div className={classes["input__controls"]}>
           <label htmlFor="time">choose time</label>
           <select
+            required
             name="time"
             id="time"
             onChange={inputHandler}
@@ -62,6 +88,7 @@ function BookingForm({ availableTimes, onTimeChange }) {
             name="guests"
             onChange={inputHandler}
             value={bookTable.guests}
+            required
           />
         </div>
         <div className={classes["input__controls"]}>
@@ -71,13 +98,13 @@ function BookingForm({ availableTimes, onTimeChange }) {
             id="occassion"
             onChange={inputHandler}
             value={bookTable.occassion}
+            required
           >
             <option value="birthday">Birthday</option>
             <option value="engagement">Engagement</option>
             <option value="anniversary">Anniversary</option>
           </select>
         </div>
-
         <PrimaryButton>confirm your reservation</PrimaryButton>
       </div>
     </form>

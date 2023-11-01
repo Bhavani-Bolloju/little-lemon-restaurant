@@ -7,6 +7,22 @@
   align-items: center;
   justify-content: center;
 
+  .back {
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    background-color: transparent;
+    outline: none;
+    border: none;
+    img {
+      width: 4rem;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
   &__container {
     display: flex;
     gap: 5rem;
