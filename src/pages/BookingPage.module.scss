@@ -1,37 +1,115 @@
-.bookingPage {
-  padding: 0rem 20rem;
-  background-color: var(--color-primary-1);
+.booking-page {
+  background-color: var(--color-white);
   min-height: 100vh;
   height: inherit;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 
-  .back {
-    position: absolute;
-    top: 10%;
-    left: 10%;
-    background-color: transparent;
-    outline: none;
-    border: none;
-    img {
-      width: 4rem;
-    }
-
-    &:hover {
-      cursor: pointer;
-    }
+  &__header {
+    background-color: var(--color-tertiary-1);
+    text-align: center;
+    padding: 5rem;
   }
 
-  &__container {
+  &__title {
+    font-size: 3.2rem;
+    font-weight: 500;
+    font-family: var(--font-Markazi);
+    color: var(--color-text-1);
+    line-height: 138.2%;
+  }
+
+  &__text {
+    width: 40%;
+    margin: auto;
+    font-size: 1.8rem;
+    font-weight: 400;
+    line-height: 140.2%;
+  }
+
+  &__main {
     display: flex;
-    gap: 5rem;
+    flex-wrap: wrap;
+    padding: 5rem 0;
+    column-gap: 5rem;
+    color: var(--color-primary-1);
+
+    &--title {
+      width: 100%;
+      text-transform: capitalize;
+      text-align: center;
+      margin-bottom: 5rem;
+      font-family: var(--font-Markazi);
+      font-size: 4.2rem;
+    }
   }
+  &__footer {
+    background-color: var(--color-primary-2);
+    display: flex;
+    justify-content: space-between;
+    padding: 8rem 25rem;
+  }
+
+  &__logo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    &-image {
+      width: 20%;
+      height: auto;
+
+      img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+      }
+    }
+
+    &-text {
+      width: 50%;
+      line-height: 138.2%;
+      margin-top: 1rem;
+      color: var(--color-primary-1);
+      font-weight: 400;
+      font-size: 1.6rem;
+    }
+  }
+
+  .opening-hours {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+    color: var(--color-primary-1);
+
+    &__title {
+      font-size: 1.8rem;
+      text-transform: capitalize;
+      font-weight: 500;
+    }
+
+    &__list {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+
+      li {
+        display: flex;
+        gap: 0.5rem;
+        span {
+          &:first-child {
+            text-transform: capitalize;
+            font-weight: 500;
+          }
+        }
+      }
+    }
+  }
+
   &__image {
-    width: 100%;
-    height: 40rem;
-    border-radius: 0.5rem;
-    overflow: hidden;
+    width: 50%;
+    // height: 45rem;
 
     img {
       width: 100%;

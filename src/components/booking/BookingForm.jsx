@@ -44,16 +44,16 @@ function BookingForm({ availableTimes, onTimeChange }) {
 
   return (
     <form className={classes.bookingForm} onSubmit={formSubmitHandler}>
-      <h2
+      {/* <h2
         role="heading"
         aria-level="2"
         className={classes["bookingForm__title"]}
       >
         Reserve a table
-      </h2>
+      </h2> */}
       <div className={classes["bookingForm__container"]}>
         <div className={classes["input__controls"]}>
-          <label htmlFor="">choose date</label>
+          <label htmlFor="">choose date: </label>
           <input
             type="date"
             name="date"
@@ -63,7 +63,7 @@ function BookingForm({ availableTimes, onTimeChange }) {
           />
         </div>
         <div className={classes["input__controls"]}>
-          <label htmlFor="time">choose time</label>
+          <label htmlFor="time">time:</label>
           <select
             required
             name="time"
@@ -78,19 +78,7 @@ function BookingForm({ availableTimes, onTimeChange }) {
             ))}
           </select>
         </div>
-        <div className={classes["input__controls"]}>
-          <label htmlFor="guests">Number of guests</label>
-          <input
-            type="number"
-            placeholder="1"
-            min="1"
-            max="10"
-            name="guests"
-            onChange={inputHandler}
-            value={bookTable.guests}
-            required
-          />
-        </div>
+
         <div className={classes["input__controls"]}>
           <label htmlFor="occassion">occasion</label>
           <select
@@ -104,6 +92,40 @@ function BookingForm({ availableTimes, onTimeChange }) {
             <option value="engagement">Engagement</option>
             <option value="anniversary">Anniversary</option>
           </select>
+        </div>
+        <div className={classes["input__controls"]}>
+          <label htmlFor="guests">Diners: </label>
+          <input
+            type="number"
+            placeholder="1"
+            min="1"
+            max="10"
+            name="guests"
+            onChange={inputHandler}
+            value={bookTable.guests}
+            required
+          />
+        </div>
+        <div className={classes.seatingOptions}>
+          <p className={classes["seatingOptions__title"]}>seating options:</p>
+          <div className={classes["input__controls"]}>
+            <input type="checkbox" id="indoor" />
+            <label htmlFor="indoor">indoor</label>
+          </div>
+          <div className={classes["input__controls"]}>
+            <input type="checkbox" id="outdoor" />
+            <label htmlFor="outdoor">outdoor</label>
+          </div>
+        </div>
+        <div className={classes["additional-comments"]}>
+          <label htmlFor="comments">additional comments:</label>
+          <textarea
+            name="comments"
+            id="comments"
+            cols="30"
+            rows="5"
+            placeholder="Your comments"
+          />
         </div>
         <PrimaryButton>confirm your reservation</PrimaryButton>
       </div>

@@ -1,6 +1,6 @@
 .bookingForm {
-  color: var(--color-text-2);
-  flex-basis: 80%;
+  color: var(--color-text-1);
+  width: 90%;
 
   h2 {
     font-size: 4rem;
@@ -17,38 +17,94 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     column-gap: 3rem;
-    row-gap: 3rem;
+    row-gap: 5rem;
   }
 
   button {
     grid-column: 2 span;
     text-wrap: nowrap;
     justify-self: start;
-    margin-top: 3rem;
   }
 }
 
 .input__controls {
   display: flex;
-  flex-direction: column;
-  gap: 0.8rem;
+  align-items: center;
+  gap: 1rem;
 
   label {
     text-transform: capitalize;
     font-size: 1.8rem;
+    text-wrap: nowrap;
+    font-weight: 500;
   }
 
   input,
-  select,
-  input::placeholder {
-    border-radius: 0.5rem;
+  select {
+    // border-radius: 0.5rem;
     outline: none;
     border: none;
     padding: 0.8rem 1rem;
-    color: var(--color-text-1);
+    color: var(--color-primary-1);
     font-family: var(--font-karla);
     font-weight: 500;
     font-size: 1.6rem;
-    background-color: var(--color-primary-2);
+    background-color: var(--color-input-field);
+    border-bottom: 1px solid var(--border-color);
+    flex-grow: 1;
+  }
+}
+
+.seatingOptions {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  grid-column: span 2;
+  gap: 3rem;
+  align-content: center;
+
+  &__title {
+    text-wrap: nowrap;
+    font-size: 1.8rem;
+    font-weight: 500;
+    margin-right: 2rem;
+  }
+
+  label {
+    color: var(--color-primary-1);
+  }
+}
+
+.additional-comments {
+  display: flex;
+  flex-direction: column;
+  grid-column: span 2;
+
+  label {
+    font-weight: 500;
+    font-size: 1.8rem;
+    color: var(--color-text-1);
+    text-transform: capitalize;
+    margin-bottom: 1rem;
+  }
+
+  textarea {
+    background-color: var(--color-input-field);
+    border: none;
+    outline: none;
+    resize: none;
+    border-bottom: 1px solid var(--border-color);
+    padding: 1.5rem;
+    font-family: inherit;
+    font-size: 1.8rem;
+    color: var(--color-primary-1);
+    font-weight: 500;
+
+    &::placeholder {
+      font-family: var(--font-karla);
+      color: var(--color-primary-1);
+      font-size: 1.8rem;
+      font-weight: 400;
+    }
   }
 }
