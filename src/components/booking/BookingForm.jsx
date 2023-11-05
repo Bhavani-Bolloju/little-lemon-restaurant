@@ -6,9 +6,11 @@ import { useNavigate } from "react-router-dom";
 function BookingForm({ availableTimes, onTimeChange }) {
   const [bookTable, setBookTable] = useState({
     date: "",
-    time: "",
-    guests: 1,
-    occassion: "birthday"
+    time: "00:00",
+    occassion: "birthday",
+    diners: 1,
+    seating: "indoor",
+    comments: ""
   });
 
   const navigate = useNavigate();
@@ -24,7 +26,7 @@ function BookingForm({ availableTimes, onTimeChange }) {
     if (
       bookTable.date.trim() == "" ||
       bookTable.time.trim() == "" ||
-      bookTable.guests.trim() == "" ||
+      bookTable.diners.trim() == "" ||
       bookTable.occassion.trim() == ""
     ) {
       return;
@@ -44,19 +46,13 @@ function BookingForm({ availableTimes, onTimeChange }) {
 
   return (
     <form className={classes.bookingForm} onSubmit={formSubmitHandler}>
-      {/* <h2
-        role="heading"
-        aria-level="2"
-        className={classes["bookingForm__title"]}
-      >
-        Reserve a table
-      </h2> */}
       <div className={classes["bookingForm__container"]}>
         <div className={classes["input__controls"]}>
           <label htmlFor="">choose date: </label>
           <input
             type="date"
             name="date"
+            min={new Date().toISOString().split("T")[0]}
             onChange={inputHandler}
             value={bookTable.date}
             required
@@ -71,7 +67,10 @@ function BookingForm({ availableTimes, onTimeChange }) {
             onChange={inputHandler}
             value={bookTable.time}
           >
-            {availableTimes.map((time, i) => (
+            {bookTable.time === "00:00" && (
+              <option value={bookTable.time}>00:00</option>
+            )}
+            {availableTimes?.map((time, i) => (
               <option key={i} value={time}>
                 {time}
               </option>
@@ -94,13 +93,13 @@ function BookingForm({ availableTimes, onTimeChange }) {
           </select>
         </div>
         <div className={classes["input__controls"]}>
-          <label htmlFor="guests">Diners: </label>
+          <label htmlFor="diners">Diners: </label>
           <input
             type="number"
-            placeholder="1"
+            placeholder="0"
             min="1"
             max="10"
-            name="guests"
+            name="diners"
             onChange={inputHandler}
             value={bookTable.guests}
             required
@@ -109,11 +108,25 @@ function BookingForm({ availableTimes, onTimeChange }) {
         <div className={classes.seatingOptions}>
           <p className={classes["seatingOptions__title"]}>seating options:</p>
           <div className={classes["input__controls"]}>
-            <input type="checkbox" id="indoor" />
+            <input
+              type="radio"
+              id="indoor"
+              value="indoor"
+              name="seating"
+              checked={bookTable.seating === "indoor"}
+              onChange={inputHandler}
+            />
             <label htmlFor="indoor">indoor</label>
           </div>
           <div className={classes["input__controls"]}>
-            <input type="checkbox" id="outdoor" />
+            <input
+              type="radio"
+              id="outdoor"
+              name="seating"
+              value="outdoor"
+              checked={bookTable.seating === "outdoor"}
+              onChange={inputHandler}
+            />
             <label htmlFor="outdoor">outdoor</label>
           </div>
         </div>
@@ -125,6 +138,9 @@ function BookingForm({ availableTimes, onTimeChange }) {
             cols="30"
             rows="5"
             placeholder="Your comments"
+            value={bookTable.comments}
+            onChange={inputHandler}
+            required
           />
         </div>
         <PrimaryButton>confirm your reservation</PrimaryButton>

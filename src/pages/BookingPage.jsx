@@ -35,6 +35,10 @@ function BookingPage() {
 
   return (
     <section className={classes["booking-page"]}>
+      <button className={classes["back__btn"]} onClick={() => navigate("/")}>
+        <img src={back} alt="back to home page" />
+        {/* <p>Back</p> */}
+      </button>
       <header className={classes["booking-page__header"]}>
         <h1 className={classes["booking-page__title"]}>
           Welcome to little lemon restaurant
@@ -45,13 +49,13 @@ function BookingPage() {
         </p>
       </header>
       <main className={classes["booking-page__main"]}>
-        <h2 className={classes["booking-page__main--title"]}>
-          Reserve a table
-        </h2>
         <div className={classes["booking-page__image"]}>
           <img src={restaurant} alt="" />
         </div>
         <section className={classes["booking-page__form-container"]}>
+          <h2 className={classes["booking-page__main--title"]}>
+            Reserve a table
+          </h2>
           <BookingForm availableTimes={availableTimes} />
         </section>
       </main>
@@ -89,15 +93,10 @@ function BookingPage() {
 
 export default BookingPage;
 
-{
-  /* <button className={classes.back} onClick={() => navigate("/")}>
-        <img src={back} alt="back to home page" />
-      </button>
-      <div className={classes["bookingPage__container"]}>
-       
-        <BookingForm
-          availableTimes={availableTimes}
-          onTimeChange={handleChange}
-        />
-      </div> */
-}
+// <div className={classes["bookingPage__container"]}>
+
+//   <BookingForm
+//     availableTimes={availableTimes}
+//     onTimeChange={handleChange}
+//   />
+// </div>

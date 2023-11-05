@@ -6,11 +6,11 @@
   &__header {
     background-color: var(--color-tertiary-1);
     text-align: center;
-    padding: 5rem;
+    padding: 6rem;
   }
 
   &__title {
-    font-size: 3.2rem;
+    font-size: 3.6rem;
     font-weight: 500;
     font-family: var(--font-Markazi);
     color: var(--color-text-1);
@@ -28,7 +28,6 @@
   &__main {
     display: flex;
     flex-wrap: wrap;
-    padding: 5rem 0;
     column-gap: 5rem;
     color: var(--color-primary-1);
 
@@ -38,9 +37,17 @@
       text-align: center;
       margin-bottom: 5rem;
       font-family: var(--font-Markazi);
-      font-size: 4.2rem;
+      font-size: 3.2rem;
+      font-weight: 500;
+      color: var(--color-text-1);
     }
   }
+
+  &__form-container {
+    flex-grow: 1;
+    padding: 4rem 2rem;
+  }
+
   &__footer {
     background-color: var(--color-primary-2);
     display: flex;
@@ -54,8 +61,8 @@
     align-items: flex-start;
 
     &-image {
-      width: 20%;
-      height: auto;
+      width: 20rem;
+      height: 5rem;
 
       img {
         width: 100%;
@@ -115,6 +122,39 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+    }
+  }
+}
+
+.back__btn {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  width: 4rem;
+  position: absolute;
+  left: 10%;
+  top: 5%;
+
+  img {
+    width: 100%;
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  p {
+    font-size: 1.4rem;
+    color: var(--color-primary-1);
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.1s;
+  }
+
+  &:hover {
+    p {
+      visibility: visible;
+      opacity: 1;
     }
   }
 }
