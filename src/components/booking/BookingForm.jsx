@@ -25,26 +25,44 @@ function BookingForm({ availableTimes, availabilityCheck }) {
     });
   };
 
-  const formSubmitHandler = function (e) {
+  // console.log(bookTable);
+
+  const formSubmitHandler = async function (e) {
     e.preventDefault();
     if (
-      bookTable.selectedDate.trim() == "" ||
-      bookTable.selectedTime.trim() == "" ||
-      bookTable.numberOfDiners.trim() == "" ||
-      bookTable.occassion.trim() == ""
+      bookTable.selectedDate.trim() === "" ||
+      bookTable.selectedTime.trim() === "" ||
+      bookTable.numberOfDiners < 0 ||
+      bookTable.comments.trim() === "" ||
+      bookTable.occassion.trim() === ""
     ) {
       return;
     }
 
-    // setBookTable({
-    //   date: "",
-    //   time: availableTimes[0],
-    //   guests: 1,
-    //   occassion: "birthday"
-    // });
+    console.log(bookTable);
 
-    // navigate("/bookingConfirm");
+    try {
+      const request = await fetch(
+        `https://little-lemon-restaurant-4ced5-default-rtdb.firebaseio.com/reservations.json`,
+        {
+          method: "POST",
+          headers: {
+            "content-type": "application/json"
+          },
+          body: JSON.stringify(bookTable)
+        }
+      );
+
+      if (!request.ok) throw new Error("Failed to send data");
+      const res = await request.json();
+      // console.log(res.name);
+      navigate(`/bookingConfirm/${res.name}`);
+    } catch (error) {
+      console.log(error, "err");
+    }
   };
+
+  // console.log(bookTable);
 
   return (
     <form className={classes.bookingForm} onSubmit={formSubmitHandler}>
@@ -69,7 +87,7 @@ function BookingForm({ availableTimes, availabilityCheck }) {
             onChange={inputHandler}
             value={bookTable.selectedTime}
           >
-            {bookTable.selectedTime === "00:00" && (
+            {bookTable.selectedTime === "" && (
               <option value={bookTable.selectedTime}>00:00</option>
             )}
             {availableTimes?.map((time, i) => (
@@ -113,9 +131,9 @@ function BookingForm({ availableTimes, availabilityCheck }) {
             <input
               type="radio"
               id="indoor"
+              name="seatingOption"
               value="indoor"
-              name="seating"
-              checked={bookTable.seating === "indoor"}
+              checked={bookTable.seatingOption === "indoor"}
               onChange={inputHandler}
             />
             <label htmlFor="indoor">indoor</label>
@@ -124,9 +142,9 @@ function BookingForm({ availableTimes, availabilityCheck }) {
             <input
               type="radio"
               id="outdoor"
-              name="seating"
+              name="seatingOption"
               value="outdoor"
-              checked={bookTable.seating === "outdoor"}
+              checked={bookTable.seatingOption === "outdoor"}
               onChange={inputHandler}
             />
             <label htmlFor="outdoor">outdoor</label>

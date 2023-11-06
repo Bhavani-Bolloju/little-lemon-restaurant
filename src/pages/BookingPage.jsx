@@ -17,14 +17,11 @@ export const updateTimes = function (state, action) {
 };
 
 export const initializeTimes = function () {
-  //this is the initial state of available times
   return times;
 };
 
 function BookingPage() {
   const [availableTimes, dispatch] = useReducer(updateTimes, initializeTimes());
-
-  console.log(availableTimes);
 
   const navigate = useNavigate();
 
@@ -42,6 +39,7 @@ function BookingPage() {
         if (!response.ok) throw new Error("failed try again");
 
         const data = await response.json();
+        console.log(data, "data");
 
         dispatch({ type: "SET_TIMES", times: data });
       } catch (error) {

@@ -1,10 +1,11 @@
 .bookingconfirmation {
   background-color: var(--color-primary-2);
-  height: 100vh;
+  min-height: 100vh;
+  color: var(--color-primary-1);
 
   &__image {
     width: 100%;
-    height: 50vh;
+    height: 40vh;
     img {
       width: 100%;
       height: 100%;
@@ -12,11 +13,55 @@
     }
   }
 
+  &__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 3rem;
+    width: 45%;
+    margin: 3rem auto 0;
+  }
+
+  &__title {
+    font-size: 3.8rem;
+    margin-bottom: 1rem;
+    font-weight: 500;
+    font-family: var(--font-Markazi);
+  }
+
   &__text {
     text-align: center;
-    font-size: 3rem;
+    font-size: 1.8rem;
+    font-weight: 400;
+
+    &:last-child {
+      font-size: 2rem;
+      margin-top: 2rem;
+    }
+  }
+
+  &__list {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+    margin: 3rem 0;
+  }
+  &__item {
+    text-transform: capitalize;
+    &:not(:last-child) {
+      border-right: 1px solid;
+      padding-right: 1rem;
+    }
+  }
+  &__label {
     font-weight: 500;
-    margin-top: 5rem;
+  }
+
+  &__highlight {
+    font-weight: 500;
   }
 
   .redirect {
