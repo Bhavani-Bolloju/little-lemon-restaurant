@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React, { useReducer, useState } from "react";
 import BookingForm from "../components/booking/BookingForm";
 import restaurant from "../assets/little-lemon-assets/restaurant.jpg";
 import classes from "./BookingPage.module.scss";
@@ -22,6 +22,8 @@ export const initializeTimes = function () {
 
 function BookingPage() {
   const [availableTimes, dispatch] = useReducer(updateTimes, initializeTimes());
+
+  const [reservedSlots, setReservedSlots] = useState(null);
 
   const navigate = useNavigate();
 
@@ -48,7 +50,35 @@ function BookingPage() {
     };
 
     fetchTimingsForSelectedDay(selectedDay);
+
+    //fetch reserved dates
+    const reservationsURL = `https://little-lemon-restaurant-4ced5-default-rtdb.firebaseio.com/reservations.json?selectedDate=${selectedDate}`;
+
+    const fetchReservedSlots = async function () {
+      const request = await fetch(reservationsURL);
+
+      const res = await request.json();
+      setReservedSlots(res);
+    };
+
+    fetchReservedSlots();
   };
+
+  // Filter the available times to exclude already booked slots
+
+  let filteredAvailableTimes = availableTimes;
+
+  if (reservedSlots && availableTimes.length > 0) {
+    const bookedSlots = [];
+
+    for (const [_, obj] of Object.entries(reservedSlots)) {
+      const { selectedTime } = obj;
+      bookedSlots.push(selectedTime);
+    }
+    filteredAvailableTimes = availableTimes.filter(
+      (time) => !bookedSlots.includes(time)
+    );
+  }
 
   return (
     <section className={classes["booking-page"]}>
@@ -73,7 +103,7 @@ function BookingPage() {
             Reserve a table
           </h2>
           <BookingForm
-            availableTimes={availableTimes}
+            availableTimes={filteredAvailableTimes}
             availabilityCheck={fetchAvailableTimes}
           />
         </section>

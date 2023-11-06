@@ -25,8 +25,6 @@ function BookingForm({ availableTimes, availabilityCheck }) {
     });
   };
 
-  // console.log(bookTable);
-
   const formSubmitHandler = async function (e) {
     e.preventDefault();
     if (
@@ -55,14 +53,11 @@ function BookingForm({ availableTimes, availabilityCheck }) {
 
       if (!request.ok) throw new Error("Failed to send data");
       const res = await request.json();
-      // console.log(res.name);
       navigate(`/bookingConfirm/${res.name}`);
     } catch (error) {
       console.log(error, "err");
     }
   };
-
-  // console.log(bookTable);
 
   return (
     <form className={classes.bookingForm} onSubmit={formSubmitHandler}>
