@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useState } from "react";
+import React, { useReducer } from "react";
 import BookingForm from "../components/booking/BookingForm";
 import restaurant from "../assets/little-lemon-assets/restaurant.jpg";
 import classes from "./BookingPage.module.scss";
@@ -7,13 +7,15 @@ import { useNavigate } from "react-router-dom";
 
 import logo from "../assets/little-lemon-assets/Logo.svg";
 
-export const times = ["17:00", "18:00", "19:00", "20:00", "21:00", "22:00"];
+export const times = [];
 
 export const updateTimes = function (state, action) {
-  //this will handle the availabletimes values based on selected date we get from action
-  // console.log(action, "reducer");
+  if (action.type === "SET_TIMES") {
+    return action.times;
+  }
   return state;
 };
+
 export const initializeTimes = function () {
   //this is the initial state of available times
   return times;
@@ -22,22 +24,38 @@ export const initializeTimes = function () {
 function BookingPage() {
   const [availableTimes, dispatch] = useReducer(updateTimes, initializeTimes());
 
+  console.log(availableTimes);
+
   const navigate = useNavigate();
 
-  const handleChange = function (selectedDate) {
-    dispatch({
-      type: "booking",
-      value: {
-        date: selectedDate
-      }
+  const fetchAvailableTimes = function (selectedDate) {
+    const selectedDay = new Date(selectedDate).toLocaleDateString("en-US", {
+      weekday: "long"
     });
+
+    const fetchTimingsForSelectedDay = async function (day) {
+      try {
+        const response = await fetch(
+          `https://little-lemon-restaurant-4ced5-default-rtdb.firebaseio.com/restaurant_hours/${day}/.json`
+        );
+
+        if (!response.ok) throw new Error("failed try again");
+
+        const data = await response.json();
+
+        dispatch({ type: "SET_TIMES", times: data });
+      } catch (error) {
+        console.log(error, "err");
+      }
+    };
+
+    fetchTimingsForSelectedDay(selectedDay);
   };
 
   return (
     <section className={classes["booking-page"]}>
       <button className={classes["back__btn"]} onClick={() => navigate("/")}>
         <img src={back} alt="back to home page" />
-        {/* <p>Back</p> */}
       </button>
       <header className={classes["booking-page__header"]}>
         <h1 className={classes["booking-page__title"]}>
@@ -56,7 +74,10 @@ function BookingPage() {
           <h2 className={classes["booking-page__main--title"]}>
             Reserve a table
           </h2>
-          <BookingForm availableTimes={availableTimes} />
+          <BookingForm
+            availableTimes={availableTimes}
+            availabilityCheck={fetchAvailableTimes}
+          />
         </section>
       </main>
       <footer className={classes["booking-page__footer"]}>
@@ -92,11 +113,3 @@ function BookingPage() {
 }
 
 export default BookingPage;
-
-// <div className={classes["bookingPage__container"]}>
-
-//   <BookingForm
-//     availableTimes={availableTimes}
-//     onTimeChange={handleChange}
-//   />
-// </div>

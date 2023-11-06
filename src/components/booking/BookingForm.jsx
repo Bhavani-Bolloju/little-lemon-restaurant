@@ -1,21 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import classes from "./BookingForm.module.scss";
 import PrimaryButton from "../ui/PrimaryButton";
 import { useNavigate } from "react-router-dom";
 
-function BookingForm({ availableTimes, onTimeChange }) {
+function BookingForm({ availableTimes, availabilityCheck }) {
   const [bookTable, setBookTable] = useState({
-    date: "",
-    time: "00:00",
+    selectedDate: "",
+    selectedTime: "",
     occassion: "birthday",
-    diners: 1,
-    seating: "indoor",
+    numberOfDiners: 1,
+    seatingOption: "indoor",
     comments: ""
   });
 
   const navigate = useNavigate();
 
   const inputHandler = function (e) {
+    if (e.target.name === "selectedDate") {
+      availabilityCheck(e.target.value);
+    }
+
     setBookTable((prev) => {
       return { ...prev, [e.target.name]: e.target.value };
     });
@@ -24,15 +28,13 @@ function BookingForm({ availableTimes, onTimeChange }) {
   const formSubmitHandler = function (e) {
     e.preventDefault();
     if (
-      bookTable.date.trim() == "" ||
-      bookTable.time.trim() == "" ||
-      bookTable.diners.trim() == "" ||
+      bookTable.selectedDate.trim() == "" ||
+      bookTable.selectedTime.trim() == "" ||
+      bookTable.numberOfDiners.trim() == "" ||
       bookTable.occassion.trim() == ""
     ) {
       return;
     }
-
-    console.log("done");
 
     // setBookTable({
     //   date: "",
@@ -41,7 +43,7 @@ function BookingForm({ availableTimes, onTimeChange }) {
     //   occassion: "birthday"
     // });
 
-    navigate("/bookingConfirm");
+    // navigate("/bookingConfirm");
   };
 
   return (
@@ -51,10 +53,10 @@ function BookingForm({ availableTimes, onTimeChange }) {
           <label htmlFor="">choose date: </label>
           <input
             type="date"
-            name="date"
+            name="selectedDate"
             min={new Date().toISOString().split("T")[0]}
             onChange={inputHandler}
-            value={bookTable.date}
+            value={bookTable.selectedDate}
             required
           />
         </div>
@@ -62,13 +64,13 @@ function BookingForm({ availableTimes, onTimeChange }) {
           <label htmlFor="time">time:</label>
           <select
             required
-            name="time"
+            name="selectedTime"
             id="time"
             onChange={inputHandler}
-            value={bookTable.time}
+            value={bookTable.selectedTime}
           >
-            {bookTable.time === "00:00" && (
-              <option value={bookTable.time}>00:00</option>
+            {bookTable.selectedTime === "00:00" && (
+              <option value={bookTable.selectedTime}>00:00</option>
             )}
             {availableTimes?.map((time, i) => (
               <option key={i} value={time}>
@@ -99,9 +101,9 @@ function BookingForm({ availableTimes, onTimeChange }) {
             placeholder="0"
             min="1"
             max="10"
-            name="diners"
+            name="numberOfDiners"
             onChange={inputHandler}
-            value={bookTable.guests}
+            value={bookTable.numberOfDiners}
             required
           />
         </div>
