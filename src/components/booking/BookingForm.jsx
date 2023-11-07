@@ -8,7 +8,7 @@ function BookingForm({ availableTimes, availabilityCheck }) {
     selectedDate: "",
     selectedTime: "",
     occassion: "birthday",
-    numberOfDiners: 1,
+    numberOfDiners: 0,
     seatingOption: "indoor",
     comments: ""
   });
@@ -17,7 +17,15 @@ function BookingForm({ availableTimes, availabilityCheck }) {
 
   const inputHandler = function (e) {
     if (e.target.name === "selectedDate") {
-      availabilityCheck(e.target.value);
+      const selectedDate = e.target.value;
+      const selectedDay = new Date(selectedDate).getDay();
+
+      if (selectedDay === 0) {
+        alert("sorry we are closed on sundays, Please choose a different date");
+        return;
+      } else {
+        availabilityCheck(selectedDate);
+      }
     }
 
     setBookTable((prev) => {
@@ -37,7 +45,7 @@ function BookingForm({ availableTimes, availabilityCheck }) {
       return;
     }
 
-    console.log(bookTable);
+    // console.log(bookTable);
 
     try {
       const request = await fetch(
@@ -53,9 +61,10 @@ function BookingForm({ availableTimes, availabilityCheck }) {
 
       if (!request.ok) throw new Error("Failed to send data");
       const res = await request.json();
+
       navigate(`/bookingConfirm/${res.name}`);
     } catch (error) {
-      console.log(error, "err");
+      alert(error.message);
     }
   };
 
@@ -63,26 +72,31 @@ function BookingForm({ availableTimes, availabilityCheck }) {
     <form className={classes.bookingForm} onSubmit={formSubmitHandler}>
       <div className={classes["bookingForm__container"]}>
         <div className={classes["input__controls"]}>
-          <label htmlFor="">choose date: </label>
+          <label htmlFor="selectedDate" id="selectedDate">
+            choose date:
+          </label>
           <input
-            type="date"
-            name="selectedDate"
+            aria-labelledby="selectedDate"
+            id="selectedDate"
             min={new Date().toISOString().split("T")[0]}
-            onChange={inputHandler}
-            value={bookTable.selectedDate}
+            name="selectedDate"
+            type="date"
             required
+            value={bookTable.selectedDate}
+            onChange={inputHandler}
           />
         </div>
         <div className={classes["input__controls"]}>
-          <label htmlFor="time">time:</label>
+          <label htmlFor="selectedTime">time:</label>
           <select
-            required
+            aria-labelledby="selectedTime"
+            id="selectedTime"
             name="selectedTime"
-            id="time"
-            onChange={inputHandler}
+            required
             value={bookTable.selectedTime}
+            onChange={inputHandler}
           >
-            {bookTable.selectedTime === "" && (
+            {availableTimes?.length <= 0 && (
               <option value={bookTable.selectedTime}>00:00</option>
             )}
             {availableTimes?.map((time, i) => (
@@ -158,7 +172,8 @@ function BookingForm({ availableTimes, availabilityCheck }) {
             required
           />
         </div>
-        <PrimaryButton>confirm your reservation</PrimaryButton>
+        <button>confirm your reservation</button>
+        {/* <PrimaryButton>confirm your reservation</PrimaryButton> */}
       </div>
     </form>
   );

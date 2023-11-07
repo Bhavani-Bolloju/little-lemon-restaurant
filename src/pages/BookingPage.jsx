@@ -38,14 +38,16 @@ function BookingPage() {
           `https://little-lemon-restaurant-4ced5-default-rtdb.firebaseio.com/restaurant_hours/${day}/.json`
         );
 
-        if (!response.ok) throw new Error("failed try again");
+        if (!response.ok)
+          throw new Error(
+            "Failed to get available time slots, please try again"
+          );
 
         const data = await response.json();
-        console.log(data, "data");
 
         dispatch({ type: "SET_TIMES", times: data });
       } catch (error) {
-        console.log(error, "err");
+        alert(error.message);
       }
     };
 
@@ -55,10 +57,19 @@ function BookingPage() {
     const reservationsURL = `https://little-lemon-restaurant-4ced5-default-rtdb.firebaseio.com/reservations.json?selectedDate=${selectedDate}`;
 
     const fetchReservedSlots = async function () {
-      const request = await fetch(reservationsURL);
+      try {
+        const request = await fetch(reservationsURL);
 
-      const res = await request.json();
-      setReservedSlots(res);
+        if (!request.ok)
+          throw new Error(
+            "Failed to get Reserved Booking slots, please try again"
+          );
+
+        const res = await request.json();
+        setReservedSlots(res);
+      } catch (error) {
+        alert(error.message);
+      }
     };
 
     fetchReservedSlots();
