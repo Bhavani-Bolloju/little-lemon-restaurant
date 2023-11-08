@@ -144,15 +144,19 @@ function BookingForm({ availableTimes, availabilityCheck }) {
           </select>
         </div>
         <div className={classes["input__controls"]}>
-          <label htmlFor="diners">Diners: </label>
+          <label htmlFor="diners" id="diners">
+            Diners:
+          </label>
           <input
+            aria-labelledby="diners"
+            id="diners"
             type="number"
             placeholder="0"
             min="1"
             max="10"
             name="numberOfDiners"
-            onChange={inputHandler}
             value={bookTable.numberOfDiners}
+            onChange={inputHandler}
             required
           />
         </div>
