@@ -1,6 +1,7 @@
 .bookingForm {
   color: var(--color-text-1);
   width: 100%;
+  margin: auto;
 
   @media screen and (max-width: 550px) {
     width: 80%;
