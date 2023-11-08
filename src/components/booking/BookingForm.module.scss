@@ -1,6 +1,13 @@
 .bookingForm {
   color: var(--color-text-1);
-  width: 90%;
+  width: 100%;
+
+  @media screen and (max-width: 550px) {
+    width: 80%;
+  }
+  @media screen and (max-width: 400px) {
+    width: 90%;
+  }
 
   h2 {
     font-size: 4rem;
@@ -16,8 +23,15 @@
   &__container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+    justify-content: center;
     column-gap: 3rem;
-    row-gap: 5rem;
+    row-gap: 4.5rem;
+
+    @media screen and (max-width: 550px) {
+      grid-template-columns: none;
+      display: flex;
+      flex-direction: column;
+    }
   }
 
   button {
@@ -41,7 +55,6 @@
 
   input,
   select {
-    // border-radius: 0.5rem;
     outline: none;
     border: none;
     padding: 0.8rem 1rem;
@@ -63,12 +76,21 @@
   gap: 3rem;
   align-content: center;
 
+  @media screen and (max-width: 550px) {
+    // flex-wrap: wrap;
+    gap: 1rem;
+  }
+
   &__title {
     text-wrap: nowrap;
     font-size: 1.8rem;
     font-weight: 500;
     margin-right: 2rem;
     text-transform: capitalize;
+
+    @media screen and (max-width: 550px) {
+      width: 100%;
+    }
   }
 
   label {
