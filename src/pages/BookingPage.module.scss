@@ -79,9 +79,12 @@
     justify-content: space-between;
     align-items: center;
     padding: 8rem 0rem;
-    width: 80%;
+    width: 70%;
     margin: auto;
 
+    @media screen and (max-width: 768x) {
+      width: 80%;
+    }
     @media screen and (max-width: 550px) {
       flex-direction: column;
       gap: 3rem;

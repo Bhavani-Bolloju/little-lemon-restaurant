@@ -48,11 +48,19 @@ test("displays error when time field is empty", () => {
 // const server = setupServer(rest.get());
 
 test("display error when occasion is empty", () => {
-  <BrowserRouter>
-    <BookingForm availableTimes={[]} availabilityCheck={() => {}} />
-  </BrowserRouter>;
+  render(
+    <BrowserRouter>
+      <BookingForm availableTimes={[]} availabilityCheck={() => {}} />
+    </BrowserRouter>
+  );
 
-  const occasionOption = screen.getByLabelText("occasion:");
+  const occasionSelect = screen.getByLabelText("occasion:");
 
-  expect(occasionOption).toBeInvalid();
+  expect(occasionSelect).toBeInvalid();
+
+  fireEvent.change(occasionSelect, { target: { value: "birthday" } });
+
+  expect(occasionSelect).not.toHaveValue("");
+
+  // const selectOccasion = screen
 });

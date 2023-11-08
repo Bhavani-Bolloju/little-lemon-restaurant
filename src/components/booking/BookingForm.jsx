@@ -82,6 +82,8 @@ function BookingForm({ availableTimes, availabilityCheck }) {
     });
   };
 
+  console.log(bookTable.occasion);
+
   return (
     <form className={classes.bookingForm} onSubmit={formSubmitHandler}>
       <div className={classes["bookingForm__container"]}>
