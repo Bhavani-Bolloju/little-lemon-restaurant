@@ -54,7 +54,7 @@ function BookingPage() {
     fetchTimingsForSelectedDay(selectedDay);
 
     //fetch reserved dates
-    const reservationsURL = `https://little-lemon-restaurant-4ced5-default-rtdb.firebaseio.com/reservations.json?selectedDate=${selectedDate}`;
+    const reservationsURL = `https://little-lemon-restaurant-4ced5-default-rtdb.firebaseio.com/reservations.json?orderBy="selectedDate"&equalTo="${selectedDate}"`;
 
     const fetchReservedSlots = async function () {
       try {
@@ -66,6 +66,7 @@ function BookingPage() {
           );
 
         const res = await request.json();
+        // console.log(res, "reserved slots", selectedDate);
         setReservedSlots(res);
       } catch (error) {
         alert(error.message);
@@ -75,13 +76,10 @@ function BookingPage() {
     fetchReservedSlots();
   };
 
-  // Filter the available times to exclude already booked slots
+  let filteredAvailableTimes = [];
 
-  let filteredAvailableTimes = availableTimes;
-
+  let bookedSlots = [];
   if (reservedSlots && availableTimes.length > 0) {
-    const bookedSlots = [];
-
     for (const [_, obj] of Object.entries(reservedSlots)) {
       const { selectedTime } = obj;
       bookedSlots.push(selectedTime);
@@ -89,6 +87,15 @@ function BookingPage() {
     filteredAvailableTimes = availableTimes.filter(
       (time) => !bookedSlots.includes(time)
     );
+  }
+
+  let allSlotsReserved = true;
+  if (reservedSlots && filteredAvailableTimes?.length === 0) {
+    allSlotsReserved = false;
+  }
+
+  if (!allSlotsReserved) {
+    alert("all slots booked");
   }
 
   return (
@@ -116,6 +123,7 @@ function BookingPage() {
           <BookingForm
             availableTimes={filteredAvailableTimes}
             availabilityCheck={fetchAvailableTimes}
+            // isSlotAvailable={allSlotsReserved}
           />
         </section>
       </main>

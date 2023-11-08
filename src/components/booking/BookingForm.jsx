@@ -15,6 +15,8 @@ function BookingForm({ availableTimes, availabilityCheck }) {
 
   const navigate = useNavigate();
 
+  // console.log(availableTimes, "times arr");
+
   const inputHandler = function (e) {
     if (e.target.name === "selectedDate") {
       const selectedDate = e.target.value;
@@ -35,6 +37,8 @@ function BookingForm({ availableTimes, availabilityCheck }) {
 
   const formSubmitHandler = async function (e) {
     e.preventDefault();
+
+    console.log(bookTable);
     if (
       bookTable.selectedDate.trim() === "" ||
       bookTable.selectedTime.trim() === "" ||
@@ -45,7 +49,7 @@ function BookingForm({ availableTimes, availabilityCheck }) {
       return;
     }
 
-    // console.log(bookTable);
+    // console.log("clicked");
 
     try {
       const request = await fetch(
@@ -66,6 +70,15 @@ function BookingForm({ availableTimes, availabilityCheck }) {
     } catch (error) {
       alert(error.message);
     }
+
+    setBookTable({
+      selectedDate: "",
+      selectedTime: "",
+      occassion: "birthday",
+      numberOfDiners: 0,
+      seatingOption: "indoor",
+      comments: ""
+    });
   };
 
   return (
@@ -87,7 +100,9 @@ function BookingForm({ availableTimes, availabilityCheck }) {
           />
         </div>
         <div className={classes["input__controls"]}>
-          <label htmlFor="selectedTime">time:</label>
+          <label htmlFor="selectedTime" id="selectedTime">
+            time:
+          </label>
           <select
             aria-labelledby="selectedTime"
             id="selectedTime"
@@ -96,7 +111,7 @@ function BookingForm({ availableTimes, availabilityCheck }) {
             value={bookTable.selectedTime}
             onChange={inputHandler}
           >
-            {availableTimes?.length <= 0 && (
+            {availableTimes?.length <= 1 && (
               <option value={bookTable.selectedTime}>00:00</option>
             )}
             {availableTimes?.map((time, i) => (
@@ -172,8 +187,8 @@ function BookingForm({ availableTimes, availabilityCheck }) {
             required
           />
         </div>
-        <button>confirm your reservation</button>
-        {/* <PrimaryButton>confirm your reservation</PrimaryButton> */}
+        {/* <button>confirm your reservation</button> */}
+        <PrimaryButton>confirm your reservation</PrimaryButton>
       </div>
     </form>
   );
