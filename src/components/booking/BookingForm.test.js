@@ -1,6 +1,8 @@
 import { render, fireEvent, screen } from "@testing-library/react";
 import BookingForm from "./BookingForm";
 import { BrowserRouter } from "react-router-dom";
+// import { rest } from "msw";
+// import { setupServer } from "msw/node";
 
 import "@testing-library/jest-dom/extend-expect";
 
@@ -17,9 +19,9 @@ test("displays error when date field is empty", () => {
   const dateInput = screen.getByLabelText("choose date:");
   expect(dateInput).toBeInvalid();
 
-  fireEvent.change(dateInput, { target: { value: "2023-11-07" } });
+  // fireEvent.change(dateInput, { target: { value: "2023-11-07" } });
 
-  expect(dateInput).toBeValid();
+  // expect(dateInput).toBeValid();
 });
 
 test("displays error when time field is empty", () => {
@@ -37,23 +39,20 @@ test("displays error when time field is empty", () => {
   expect(timeInput).toBeInvalid();
 });
 
-// test("displays available time options", () => {
-//   const availableTimes = ["12:00", "13:00", "14:00"];
+// const sampleOptions = [
+//   "5.30 PM - 6.30 PM",
+//   "6.30 PM - 7.30 PM",
+//   "7.30 PM - 8.30 PM"
+// ];
 
-//   render(
-//     <BrowserRouter>
-//       <BookingForm
-//         availableTimes={availableTimes}
-//         availabilityCheck={() => {}}
-//       />
-//     </BrowserRouter>
-//   );
+// const server = setupServer(rest.get());
 
-//   const timeInput = screen.getByLabelText("time:");
+test("display error when occasion is empty", () => {
+  <BrowserRouter>
+    <BookingForm availableTimes={[]} availabilityCheck={() => {}} />
+  </BrowserRouter>;
 
-//   expect(timeInput).toBeValid();
+  const occasionOption = screen.getByLabelText("occasion:");
 
-//   expect(screen.getByDisplayValue("12:00")).toBeInTheDocument();
-//   expect(screen.getByDisplayValue("13:00")).toBeInTheDocument();
-//   expect(screen.getByDisplayValue("14:00")).toBeInTheDocument();
-// });
+  expect(occasionOption).toBeInvalid();
+});

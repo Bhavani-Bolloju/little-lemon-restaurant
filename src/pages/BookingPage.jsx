@@ -123,7 +123,6 @@ function BookingPage() {
           <BookingForm
             availableTimes={filteredAvailableTimes}
             availabilityCheck={fetchAvailableTimes}
-            // isSlotAvailable={allSlotsReserved}
           />
         </section>
       </main>

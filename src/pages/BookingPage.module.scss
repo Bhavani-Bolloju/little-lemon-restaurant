@@ -1,12 +1,19 @@
 .booking-page {
-  background-color: var(--color-white);
   min-height: 100vh;
   height: inherit;
+  background-color: var(--color-primary-2);
 
   &__header {
     background-color: var(--color-tertiary-1);
     text-align: center;
     padding: 6rem;
+
+    @media screen and (max-width: 900px) {
+      padding: 6rem 0rem;
+    }
+    @media screen and (max-width: 600px) {
+      padding: 3rem 2rem;
+    }
   }
 
   &__title {
@@ -14,22 +21,28 @@
     font-weight: 500;
     font-family: var(--font-Markazi);
     color: var(--color-text-1);
-    line-height: 138.2%;
+    line-height: 1;
+    margin-bottom: 2rem;
   }
 
   &__text {
-    width: 40%;
+    width: 50%;
     margin: auto;
     font-size: 1.8rem;
     font-weight: 400;
     line-height: 140.2%;
+    @media screen and (max-width: 900px) {
+      width: 80%;
+    }
   }
 
   &__main {
     display: flex;
-    flex-wrap: wrap;
+    // flex-wrap: wrap;
     column-gap: 5rem;
     color: var(--color-primary-1);
+    background-color: var(--color-white);
+    // align-items: center;
 
     &--title {
       width: 100%;
@@ -49,10 +62,11 @@
   }
 
   &__footer {
-    background-color: var(--color-primary-2);
     display: flex;
     justify-content: space-between;
-    padding: 8rem 25rem;
+    padding: 8rem 0rem;
+    width: 70%;
+    margin: auto;
   }
 
   &__logo {
@@ -85,8 +99,11 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+
     gap: 1.5rem;
     color: var(--color-primary-1);
+    flex-grow: 1;
+    text-wrap: nowrap;
 
     &__title {
       font-size: 1.8rem;
@@ -116,7 +133,7 @@
 
   &__image {
     width: 50%;
-    // height: 45rem;
+    height: auto;
 
     img {
       width: 100%;
@@ -132,7 +149,7 @@
   outline: none;
   width: 4rem;
   position: absolute;
-  left: 10%;
+  left: 5%;
   top: 5%;
 
   img {

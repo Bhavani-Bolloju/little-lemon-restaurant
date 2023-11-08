@@ -7,9 +7,9 @@ function BookingForm({ availableTimes, availabilityCheck }) {
   const [bookTable, setBookTable] = useState({
     selectedDate: "",
     selectedTime: "",
-    occassion: "birthday",
+    occasion: "",
     numberOfDiners: 0,
-    seatingOption: "indoor",
+    seatingOption: "",
     comments: ""
   });
 
@@ -42,9 +42,10 @@ function BookingForm({ availableTimes, availabilityCheck }) {
     if (
       bookTable.selectedDate.trim() === "" ||
       bookTable.selectedTime.trim() === "" ||
+      bookTable.seatingOption.trim() === "" ||
       bookTable.numberOfDiners < 0 ||
       bookTable.comments.trim() === "" ||
-      bookTable.occassion.trim() === ""
+      bookTable.occasion.trim() === ""
     ) {
       return;
     }
@@ -74,7 +75,7 @@ function BookingForm({ availableTimes, availabilityCheck }) {
     setBookTable({
       selectedDate: "",
       selectedTime: "",
-      occassion: "birthday",
+      occasion: "birthday",
       numberOfDiners: 0,
       seatingOption: "indoor",
       comments: ""
@@ -123,14 +124,18 @@ function BookingForm({ availableTimes, availabilityCheck }) {
         </div>
 
         <div className={classes["input__controls"]}>
-          <label htmlFor="occassion">occasion</label>
+          <label htmlFor="occasion" id="occasion">
+            occasion:
+          </label>
           <select
-            name="occassion"
-            id="occassion"
+            aria-labelledby="occasion"
+            id="occasion"
+            name="occasion"
             onChange={inputHandler}
-            value={bookTable.occassion}
+            value={bookTable.occasion}
             required
           >
+            <option value=""></option>
             <option value="birthday">Birthday</option>
             <option value="engagement">Engagement</option>
             <option value="anniversary">Anniversary</option>
@@ -157,8 +162,9 @@ function BookingForm({ availableTimes, availabilityCheck }) {
               id="indoor"
               name="seatingOption"
               value="indoor"
-              checked={bookTable.seatingOption === "indoor"}
+              // checked={bookTable.seatingOption === "indoor"}
               onChange={inputHandler}
+              required
             />
             <label htmlFor="indoor">indoor</label>
           </div>
@@ -168,8 +174,9 @@ function BookingForm({ availableTimes, availabilityCheck }) {
               id="outdoor"
               name="seatingOption"
               value="outdoor"
-              checked={bookTable.seatingOption === "outdoor"}
+              // checked={bookTable.seatingOption === "outdoor"}
               onChange={inputHandler}
+              required
             />
             <label htmlFor="outdoor">outdoor</label>
           </div>
@@ -180,7 +187,7 @@ function BookingForm({ availableTimes, availabilityCheck }) {
             name="comments"
             id="comments"
             cols="30"
-            rows="5"
+            rows="0"
             placeholder="Your comments"
             value={bookTable.comments}
             onChange={inputHandler}
