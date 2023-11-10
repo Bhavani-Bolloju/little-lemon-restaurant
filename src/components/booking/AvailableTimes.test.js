@@ -1,4 +1,4 @@
-import { render, fireEvent, screen } from "@testing-library/react";
+import { render, fireEvent, screen, waitFor } from "@testing-library/react";
 import BookingForm from "./BookingForm";
 import { BrowserRouter } from "react-router-dom";
 
@@ -7,8 +7,30 @@ import userEvent from "@testing-library/user-event";
 
 //mocking api req
 
-describe("BookingForm", () => {
+describe("displaying all the available times and making sure time field is not empty", () => {
   const availableTimes = ["5.30 PM - 6.30 PM", "6.30 PM - 7.30 PM"];
+
+  const mockAvailabilityCheck = jest.fn();
+
+  test("fetch available times when date is selected", async () => {
+    render(
+      <BrowserRouter>
+        <BookingForm
+          availabilityCheck={mockAvailabilityCheck}
+          availableTimes={availableTimes}
+        />
+      </BrowserRouter>
+    );
+
+    const dateField = screen.getByLabelText("choose date:");
+    const selectedDate = new Date().toISOString().split("T")[0];
+
+    userEvent.type(dateField, selectedDate);
+    //wait for availabilitycheck function to be called
+    await waitFor(() => {
+      expect(mockAvailabilityCheck).toHaveBeenCalledWith(selectedDate);
+    });
+  });
 
   test("renders BookingForm with available times", async () => {
     render(
@@ -29,21 +51,19 @@ describe("BookingForm", () => {
     userEvent.selectOptions(timeSelect, availableTimes[0]);
     expect(timeSelect).toHaveValue(availableTimes[0]);
   });
-});
 
-//testing to make sure time shuldn't have empty value
+  test("displays error when time field is empty", () => {
+    render(
+      <BrowserRouter>
+        <BookingForm availableTimes={[]} availabilityCheck={() => {}} />
+      </BrowserRouter>
+    );
 
-test("displays error when time field is empty", () => {
-  render(
-    <BrowserRouter>
-      <BookingForm availableTimes={[]} availabilityCheck={() => {}} />
-    </BrowserRouter>
-  );
+    const submitBtn = screen.getByText("confirm your reservation");
+    fireEvent.click(submitBtn);
 
-  const submitBtn = screen.getByText("confirm your reservation");
-  fireEvent.click(submitBtn);
+    const timeInput = screen.getByLabelText("time:");
 
-  const timeInput = screen.getByLabelText("time:");
-
-  expect(timeInput).toBeInvalid();
+    expect(timeInput).toBeInvalid();
+  });
 });
