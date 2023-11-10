@@ -80,6 +80,7 @@ function BookingPage() {
 
   let bookedSlots = [];
   if (reservedSlots && availableTimes.length > 0) {
+    // eslint-disable-next-line
     for (const [_, obj] of Object.entries(reservedSlots)) {
       const { selectedTime } = obj;
       bookedSlots.push(selectedTime);

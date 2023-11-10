@@ -4,7 +4,6 @@ import akash from "../../assets/little-lemon-assets/akash.jpg";
 import andrea from "../../assets/little-lemon-assets/andrea.jpg";
 import engelsen from "../../assets/little-lemon-assets/engelsen.jpg";
 import campbell from "../../assets/little-lemon-assets/campbell.jpg";
-import star from "../../assets/little-lemon-assets/Star.svg";
 
 function StarRating({ rating }) {
   const maxStars = 5;

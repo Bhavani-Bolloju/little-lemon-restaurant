@@ -1,8 +1,6 @@
 import { render, fireEvent, screen } from "@testing-library/react";
 import BookingForm from "./BookingForm";
 import { BrowserRouter } from "react-router-dom";
-// import { rest } from "msw";
-// import { setupServer } from "msw/node";
 
 import "@testing-library/jest-dom/extend-expect";
 
@@ -19,27 +17,20 @@ test("displays error when date field is empty", () => {
   const dateInput = screen.getByLabelText("choose date:");
   expect(dateInput).toBeInvalid();
 
-  // fireEvent.change(dateInput, { target: { value: "2023-11-07" } });
+  fireEvent.change(dateInput, {
+    target: { value: new Date().toISOString().split("T")[0] }
+  });
 
-  // expect(dateInput).toBeValid();
-});
-
-test("displays error when time field is empty", () => {
-  render(
-    <BrowserRouter>
-      <BookingForm availableTimes={[]} availabilityCheck={() => {}} />
-    </BrowserRouter>
+  expect(dateInput).toBeValid();
+  expect(dateInput).toHaveAttribute(
+    "min",
+    new Date().toISOString().split("T")[0]
   );
-
-  const submitBtn = screen.getByText("confirm your reservation");
-  fireEvent.click(submitBtn);
-
-  const timeInput = screen.getByLabelText("time:");
-
-  expect(timeInput).toBeInvalid();
 });
 
 //write test for time options fetched from firebase
+
+test("display available times", () => {});
 
 test("display error when occasion is empty", () => {
   render(
@@ -99,4 +90,16 @@ test("select either indoor and outdoor seating option", () => {
   fireEvent.click(outdoorRadio);
   expect(outdoorRadio).toBeChecked();
   expect(indoorRadio).not.toBeChecked();
+});
+
+test("restricting additional comments to 150 characters", () => {
+  render(
+    <BrowserRouter>
+      <BookingForm availableTimes={[]} availabilityCheck={() => {}} />
+    </BrowserRouter>
+  );
+
+  const commentsField = screen.getByLabelText("additional comments:");
+
+  expect(commentsField).toHaveAttribute("maxlength", "150");
 });

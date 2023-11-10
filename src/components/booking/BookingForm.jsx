@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import classes from "./BookingForm.module.scss";
 import PrimaryButton from "../ui/PrimaryButton";
 import { useNavigate } from "react-router-dom";
@@ -82,7 +82,7 @@ function BookingForm({ availableTimes, availabilityCheck }) {
     });
   };
 
-  console.log(bookTable.occasion);
+  console.log(bookTable.selectedDate);
 
   return (
     <form className={classes.bookingForm} onSubmit={formSubmitHandler}>
@@ -193,14 +193,17 @@ function BookingForm({ availableTimes, availabilityCheck }) {
             name="comments"
             id="comments"
             cols="30"
-            rows="0"
+            rows="3"
             placeholder="Your comments"
             value={bookTable.comments}
             onChange={inputHandler}
-            required
+            maxLength={150}
           />
+          <p className={classes["additional-comments__maxlength"]}>
+            {bookTable.comments.length}/150
+          </p>
         </div>
-        {/* <button>confirm your reservation</button> */}
+
         <PrimaryButton>confirm your reservation</PrimaryButton>
       </div>
     </form>
