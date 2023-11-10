@@ -23,7 +23,9 @@ function BookingForm({ availableTimes, availabilityCheck }) {
       const selectedDay = new Date(selectedDate).getDay();
 
       if (selectedDay === 0) {
-        alert("sorry we are closed on sundays, Please choose a different date");
+        alert(
+          "Sorry, the restaurant is closed on Mondays. Please choose a different date."
+        );
         return;
       } else {
         availabilityCheck(selectedDate);

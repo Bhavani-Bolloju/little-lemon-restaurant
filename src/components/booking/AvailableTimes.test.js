@@ -11,6 +11,7 @@ describe("displaying all the available times and making sure time field is not e
   const availableTimes = ["5.30 PM - 6.30 PM", "6.30 PM - 7.30 PM"];
 
   const mockAvailabilityCheck = jest.fn();
+  const mockAlert = jest.spyOn(window, "alert").mockImplementation(() => {});
 
   test("fetch available times when date is selected", async () => {
     render(
@@ -24,12 +25,21 @@ describe("displaying all the available times and making sure time field is not e
 
     const dateField = screen.getByLabelText("choose date:");
     const selectedDate = new Date().toISOString().split("T")[0];
+    const day = new Date(selectedDate).getDay();
 
-    userEvent.type(dateField, selectedDate);
-    //wait for availabilitycheck function to be called
-    await waitFor(() => {
-      expect(mockAvailabilityCheck).toHaveBeenCalledWith(selectedDate);
-    });
+    fireEvent.change(dateField, { target: { value: selectedDate } });
+
+    if (day === 0) {
+      //add an
+      expect(mockAlert).toHaveBeenCalledWith(
+        "Sorry, the restaurant is closed on Mondays. Please choose a different date."
+      );
+    } else {
+      //wait for availabilitycheck function to be called
+      await waitFor(() => {
+        expect(mockAvailabilityCheck).toHaveBeenCalledWith(selectedDate);
+      });
+    }
   });
 
   test("renders BookingForm with available times", async () => {
