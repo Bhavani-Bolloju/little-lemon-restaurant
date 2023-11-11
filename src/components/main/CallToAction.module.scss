@@ -1,9 +1,24 @@
 .callToAction {
   background-color: var(--color-primary-1);
-  padding: 8rem 30rem;
+  padding: 8rem 0rem;
   color: var(--color-text-2);
-  display: flex;
-  justify-content: space-between;
+
+  &__container {
+    margin: auto;
+    width: 65%;
+    display: flex;
+    justify-content: space-between;
+    gap: 10rem;
+
+    @media screen and (max-width: 1200px) {
+      width: 70%;
+      gap: 5rem;
+    }
+    @media screen and (max-width: 950px) {
+      width: 80%;
+      gap: 2rem;
+    }
+  }
 
   &__title {
     color: var(--color-accent);
@@ -12,6 +27,13 @@
     text-transform: capitalize;
     line-height: 0.7;
     font-weight: 500;
+
+    @media screen and (max-width: 1200px) {
+      font-size: 5.8rem;
+    }
+    @media screen and (max-width: 950px) {
+      font-size: 5.2rem;
+    }
   }
   &__subTitle {
     font-family: var(--font-Markazi);
@@ -21,7 +43,7 @@
   }
 
   &__content {
-    width: 50%;
+    flex-basis: 50%;
   }
   &__text {
     font-size: 1.8rem;
@@ -34,15 +56,23 @@
     margin-top: 4rem;
   }
   &__image {
-    width: 38rem;
+    flex-basis: 50%;
+    min-width: 40%;
     position: relative;
+    flex-shrink: 1;
     img {
-      width: 100%;
-      height: 45rem;
+      width: 90%;
+      height: 150%;
+      // max-height: 45rem;
       object-fit: cover;
       position: absolute;
       right: 0;
       border-radius: 0.6rem;
+
+      @media screen and (max-width: 1200px) {
+        width: 90%;
+        height: 100%;
+      }
     }
   }
 }
