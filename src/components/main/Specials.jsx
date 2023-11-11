@@ -37,7 +37,7 @@ function Specials() {
         <SpecialItem
           title="greek salad"
           price="$12.45"
-          text="Greek salad is a simple and healthy dish that typically consists of various fresh leafy greens and other vegetables.. It's a versatile dish."
+          text="Greek salad is a simple and healthy dish that typically consists of various fresh leafy greens."
           id="1"
           image={greekSalad}
         />
@@ -51,7 +51,7 @@ function Specials() {
         <SpecialItem
           title="lemon dessert"
           price="$5.00"
-          text="This comes straight from grandma’s recipe book, every last ingredient has been sourced and is an authentic as can be imagined."
+          text="This comes straight from grandma’s recipe book, every last ingredient is an authentic as can be imagined."
           id="3"
           image={lemonDessert}
         />
