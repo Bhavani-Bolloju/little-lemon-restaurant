@@ -1,6 +1,5 @@
 import React from "react";
 import classes from "./RestaurantBackStory.module.scss";
-// import restaurant from "../../assets/little-lemon-assets/restaurant.jpg";
 import chef1 from "../../assets/little-lemon-assets/Mario and Adrian A.jpg";
 
 import chef2 from "../../assets/little-lemon-assets/Mario and Adrian b.jpg";

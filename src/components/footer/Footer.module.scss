@@ -1,26 +1,47 @@
 .footer {
-  padding: 10rem 30rem;
+  padding: 10rem 0rem;
   background-color: var(--color-primary-3);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 3rem;
   color: var(--color-primary-1);
 
+  &__container {
+    width: 65%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 3rem;
+    margin: auto;
+
+    @media screen and (max-width: 1200px) {
+      width: 70%;
+    }
+    @media screen and (max-width: 950px) {
+      width: 80%;
+    }
+    @media screen and (max-width: 750px) {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+  }
+
   &__logo {
-    flex-basis: 30%;
+    flex-basis: 25%;
+    text-align: center;
 
     img {
-      width: 80%;
+      width: 100%;
     }
   }
 
   &__links {
     display: flex;
     flex-grow: 1;
-    flex-basis: 60%;
+    flex-basis: 75%;
     align-items: flex-start;
     justify-content: space-between;
+
+    @media screen and (max-width: 750px) {
+      flex-basis: 100%;
+    }
 
     ul {
       display: flex;
