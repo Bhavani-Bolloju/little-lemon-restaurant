@@ -21,8 +21,12 @@ function RestaurantBackStory() {
         </p>
       </div>
       <div className={classes["restaurantBackStory__images"]}>
-        <img src={chef1} alt="" className={classes["image__restaurant"]} />
-        <img src={chef2} alt="" className={classes["image__chefs"]} />
+        <div className={classes["image__restaurant"]}>
+          <img src={chef1} alt="" />
+        </div>
+        <div className={classes["image__restaurant"]}>
+          <img src={chef2} alt="" />
+        </div>
       </div>
     </section>
   );

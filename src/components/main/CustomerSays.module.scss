@@ -1,6 +1,7 @@
 .customerSays {
   background-color: var(--color-primary-1);
-  padding: 10rem 30rem;
+  // padding: 10rem 30rem;
+  padding: 10rem 0rem;
 
   &__heading {
     text-align: center;
@@ -14,6 +15,19 @@
     list-style: none;
     display: flex;
     gap: 2rem;
+    padding: 0;
+
+    width: 65%;
+    margin: auto;
+
+    @media screen and (max-width: 1200px) {
+      width: 70%;
+      // gap: 5rem;
+    }
+    @media screen and (max-width: 950px) {
+      width: 80%;
+      flex-wrap: wrap;
+    }
   }
   &__item {
     flex-grow: 1;
@@ -21,6 +35,12 @@
     background-color: var(--color-primary-4);
     padding: 3rem 2rem;
     border-radius: 1.6rem;
+    @media screen and (max-width: 950px) {
+      width: 30%;
+    }
+    @media screen and (max-width: 550px) {
+      width: 50%;
+    }
   }
   &__quote {
   }

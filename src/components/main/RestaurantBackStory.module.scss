@@ -1,21 +1,41 @@
 .restaurantBackStory {
-  padding: 10rem 30rem;
+  // padding: 10rem 30rem;
+  padding: 10rem 0rem;
   display: flex;
+  align-items: center;
   color: var(--color-text-1);
-  gap: 5rem;
   padding-bottom: 20rem;
+  width: 65%;
+  margin: auto;
+  gap: 3rem;
+  // background-color: red;
+
+  @media screen and (max-width: 1200px) {
+    width: 70%;
+  }
+  @media screen and (max-width: 950px) {
+    width: 80%;
+    gap: 0rem;
+  }
+  @media screen and (max-width: 750px) {
+    flex-direction: column;
+    gap: 3rem;
+  }
 
   &__content {
-    flex-basis: 45%;
-    flex-grow: 1;
+    flex-basis: 50%;
   }
 
   &__images {
-    // background-color: red;
     align-self: stretch;
     position: relative;
-    // flex-grow: 1;
-    flex-basis: 50%;
+    flex-basis: 60%;
+    display: flex;
+    min-width: 35rem;
+
+    @media screen and (max-width: 750px) {
+      min-height: 35rem;
+    }
   }
 }
 
@@ -41,22 +61,26 @@
 .image__restaurant {
   position: absolute;
   width: 50%;
-  height: 100%;
+  height: 70%;
   z-index: 100;
-  object-fit: cover;
-  top: 30%;
-  left: 10%;
+  overflow: hidden;
+  top: 0%;
+  right: 10%;
   border-radius: 1rem;
   box-shadow: 0 5px 20px 10px rgba(0, 0, 0, 0.08);
-}
-.image__chefs {
-  position: absolute;
-  width: 50%;
-  height: 100%;
-  z-index: 100;
-  right: 0;
-  object-fit: cover;
-  z-index: 50;
-  border-radius: 1rem;
-  box-shadow: 0 5px 20px 10px rgba(0, 0, 0, 0.08);
+
+  @media screen and (min-width: 1200px) {
+    height: 100%;
+  }
+
+  &:last-child {
+    left: 10%;
+    top: 30%;
+  }
+
+  img {
+    width: 100%;
+    object-fit: cover;
+    height: 100%;
+  }
 }
