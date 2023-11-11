@@ -18,6 +18,11 @@
       width: 80%;
       gap: 2rem;
     }
+    @media screen and (max-width: 750px) {
+      width: 80%;
+      gap: 4rem;
+      flex-direction: column-reverse;
+    }
   }
 
   &__title {
@@ -58,10 +63,17 @@
   &__image {
     flex-basis: 50%;
     min-width: 40%;
+    height: 30rem;
     position: relative;
     flex-shrink: 1;
+    margin: auto;
+
+    @media screen and (max-width: 750px) {
+      min-height: 30rem;
+      width: 100%;
+    }
     img {
-      width: 90%;
+      width: 100%;
       height: 150%;
       // max-height: 45rem;
       object-fit: cover;
@@ -71,6 +83,10 @@
 
       @media screen and (max-width: 1200px) {
         width: 90%;
+        height: 100%;
+      }
+      @media screen and (max-width: 750px) {
+        width: 100%;
         height: 100%;
       }
     }

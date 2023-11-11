@@ -3,15 +3,19 @@
     list-style: none;
     display: flex;
     gap: 3rem;
+    color: var(--color-primary-1);
 
     @media screen and (max-width: 950px) {
       gap: 2rem;
+    }
+    @media screen and (max-width: 750px) {
+      gap: 1.5rem;
     }
 
     a {
       text-decoration: none;
       text-transform: capitalize;
-      color: var(--color-primary-1);
+      color: inherit;
       font-family: inherit;
       font-weight: 600;
       text-wrap: nowrap;
