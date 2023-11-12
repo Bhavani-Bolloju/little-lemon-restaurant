@@ -24,7 +24,7 @@ function BookingForm({ availableTimes, availabilityCheck }) {
 
       if (selectedDay === 0) {
         alert(
-          "Sorry, the restaurant is closed on Mondays. Please choose a different date."
+          "Sorry, the restaurant is closed on Sundays. Please choose a different date."
         );
         return;
       } else {
@@ -84,7 +84,7 @@ function BookingForm({ availableTimes, availabilityCheck }) {
     });
   };
 
-  console.log(bookTable.selectedDate);
+  // console.log(bookTable.selectedDate);
 
   return (
     <form className={classes.bookingForm} onSubmit={formSubmitHandler}>

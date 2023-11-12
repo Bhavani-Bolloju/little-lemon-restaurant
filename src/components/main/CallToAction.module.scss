@@ -73,8 +73,9 @@
       width: 100%;
     }
     img {
-      width: 100%;
+      width: 80%;
       height: 150%;
+      min-width: 35rem;
       // max-height: 45rem;
       object-fit: cover;
       position: absolute;

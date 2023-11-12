@@ -9,24 +9,50 @@ import logo from "../assets/little-lemon-assets/Logo.svg";
 
 export const times = [];
 
+const initialState = {
+  times,
+  isLoading: false,
+  reservedSlots: null
+};
+
 export const updateTimes = function (state, action) {
   if (action.type === "SET_TIMES") {
-    return action.times;
+    return {
+      ...state,
+      times: action.times
+    };
+  }
+
+  if (action.type === "LOADING") {
+    return {
+      ...state,
+      isLoading: action.loading
+    };
+  }
+
+  if (action.type === "RESERVED_SLOTS") {
+    return {
+      ...state,
+      reservedSlots: action.reservedSlots
+    };
   }
   return state;
 };
 
 export const initializeTimes = function () {
-  return times;
+  return initialState;
 };
 
 function BookingPage() {
   const [availableTimes, dispatch] = useReducer(updateTimes, initializeTimes());
 
-  const [reservedSlots, setReservedSlots] = useState(null);
+  console.log(availableTimes);
+
+  // const [reservedSlots, setReservedSlots] = useState(null);
 
   const navigate = useNavigate();
 
+  //
   const fetchAvailableTimes = function (selectedDate) {
     const selectedDay = new Date(selectedDate).toLocaleDateString("en-US", {
       weekday: "long"
@@ -34,6 +60,7 @@ function BookingPage() {
 
     const fetchTimingsForSelectedDay = async function (day) {
       try {
+        dispatch({ type: "LOADING", loading: true });
         const response = await fetch(
           `https://little-lemon-restaurant-4ced5-default-rtdb.firebaseio.com/restaurant_hours/${day}/.json`
         );
@@ -44,11 +71,12 @@ function BookingPage() {
           );
 
         const data = await response.json();
-
         dispatch({ type: "SET_TIMES", times: data });
       } catch (error) {
         alert(error.message);
       }
+
+      dispatch({ type: "LOADING", loading: false });
     };
 
     fetchTimingsForSelectedDay(selectedDay);
@@ -58,42 +86,49 @@ function BookingPage() {
 
     const fetchReservedSlots = async function () {
       try {
+        dispatch({ type: "LOADING", loading: true });
         const request = await fetch(reservationsURL);
-
         if (!request.ok)
           throw new Error(
             "Failed to get Reserved Booking slots, please try again"
           );
 
         const res = await request.json();
-        // console.log(res, "reserved slots", selectedDate);
-        setReservedSlots(res);
+
+        dispatch({ type: "RESERVED_SLOTS", reservedSlots: res });
+
+        // setReservedSlots(res);
       } catch (error) {
         alert(error.message);
       }
+
+      dispatch({ type: "LOADING", loading: false });
     };
 
     fetchReservedSlots();
   };
 
+  //logic to filter already reserved bookings
   let filteredAvailableTimes = [];
 
   let bookedSlots = [];
-  if (reservedSlots && availableTimes.length > 0) {
+  if (availableTimes?.reservedSlots && availableTimes?.times?.length > 0) {
     // eslint-disable-next-line
-    for (const [_, obj] of Object.entries(reservedSlots)) {
+    for (const [_, obj] of Object.entries(availableTimes?.reservedSlots)) {
       const { selectedTime } = obj;
       bookedSlots.push(selectedTime);
     }
-    filteredAvailableTimes = availableTimes.filter(
+    filteredAvailableTimes = availableTimes?.times?.filter(
       (time) => !bookedSlots.includes(time)
     );
   }
 
   let allSlotsReserved = true;
-  if (reservedSlots && filteredAvailableTimes?.length === 0) {
+  if (availableTimes?.reservedSlots && filteredAvailableTimes?.length === 0) {
     allSlotsReserved = false;
   }
+
+  // console.log(availableTimes?.reservedSlots, filteredAvailableTimes);
 
   if (!allSlotsReserved) {
     alert("all slots booked");
