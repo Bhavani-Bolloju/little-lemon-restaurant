@@ -3,6 +3,8 @@ import classes from "./BookingForm.module.scss";
 import PrimaryButton from "../ui/PrimaryButton";
 import { useNavigate } from "react-router-dom";
 
+import { act } from "@testing-library/react";
+
 function BookingForm({ availableTimes, availabilityCheck }) {
   const [bookTable, setBookTable] = useState({
     selectedDate: "",
@@ -32,8 +34,14 @@ function BookingForm({ availableTimes, availabilityCheck }) {
       }
     }
 
-    setBookTable((prev) => {
-      return { ...prev, [e.target.name]: e.target.value };
+    // setBookTable((prev) => {
+    //   return { ...prev, [e.target.name]: e.target.value };
+    // });
+
+    act(() => {
+      setBookTable((prev) => {
+        return { ...prev, [e.target.name]: e.target.value };
+      });
     });
   };
 
@@ -90,11 +98,14 @@ function BookingForm({ availableTimes, availabilityCheck }) {
     <form className={classes.bookingForm} onSubmit={formSubmitHandler}>
       <div className={classes["bookingForm__container"]}>
         <div className={classes["input__controls"]}>
-          <label htmlFor="selectedDate" id="selectedDate">
+          <label
+            htmlFor="selectedDate"
+            // id="selectedDate"
+          >
             choose date:
           </label>
           <input
-            aria-labelledby="selectedDate"
+            // aria-labelledby="selectedDate"
             id="selectedDate"
             min={new Date().toISOString().split("T")[0]}
             name="selectedDate"

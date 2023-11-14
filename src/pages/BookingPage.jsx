@@ -15,6 +15,7 @@ const initialState = {
   reservedSlots: null
 };
 
+//reducer update function
 export const updateTimes = function (state, action) {
   if (action.type === "SET_TIMES") {
     return {
@@ -39,16 +40,16 @@ export const updateTimes = function (state, action) {
   return state;
 };
 
+//reducer initial value
 export const initializeTimes = function () {
   return initialState;
 };
 
+//bookingpage component for reserving table
 function BookingPage() {
   const [availableTimes, dispatch] = useReducer(updateTimes, initializeTimes());
 
-  console.log(availableTimes);
-
-  // const [reservedSlots, setReservedSlots] = useState(null);
+  // console.log(availableTimes);
 
   const navigate = useNavigate();
 
@@ -128,14 +129,13 @@ function BookingPage() {
     allSlotsReserved = false;
   }
 
-  // console.log(availableTimes?.reservedSlots, filteredAvailableTimes);
-
   if (!allSlotsReserved) {
     alert("all slots booked");
   }
 
   return (
     <section className={classes["booking-page"]}>
+      {availableTimes?.isLoading && <p>Loading...</p>}
       <button className={classes["back__btn"]} onClick={() => navigate("/")}>
         <img src={back} alt="back to home page" />
       </button>

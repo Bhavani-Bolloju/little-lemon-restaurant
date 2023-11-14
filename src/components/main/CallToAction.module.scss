@@ -73,10 +73,10 @@
       width: 100%;
     }
     img {
-      width: 80%;
+      // width: 80%;
       height: 150%;
       min-width: 35rem;
-      // max-height: 45rem;
+      max-height: 45rem;
       object-fit: cover;
       position: absolute;
       right: 0;
@@ -85,6 +85,9 @@
       @media screen and (max-width: 1200px) {
         width: 90%;
         height: 100%;
+      }
+      @media screen and (max-width: 950px) {
+        min-width: 30rem;
       }
       @media screen and (max-width: 750px) {
         width: 100%;
