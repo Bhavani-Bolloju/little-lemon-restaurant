@@ -1,6 +1,10 @@
 import React from "react";
 import classes from "./CallToAction.module.scss";
-import heroImage from "../../assets/little-lemon-assets/restauranfood.jpg";
+import hero_image from "../../assets/hero-section/restauranfood-tiny.jpg";
+import hero from "../../assets/hero-section/restauranfood-original.webp";
+import hero1 from "../../assets/hero-section/restauranfood-500px.webp";
+import hero2 from "../../assets/hero-section/restauranfood-350px.webp";
+
 import PrimaryButton from "../ui/PrimaryButton";
 import { useNavigate } from "react-router-dom";
 
@@ -23,9 +27,19 @@ function CallToAction() {
             reserve a table
           </PrimaryButton>
         </div>
-        <div className={classes["callToAction__image"]}>
-          <img src={heroImage} alt="" />
-        </div>
+        <picture className={classes["callToAction__image"]}>
+          <img
+            srcSet={`${hero} 2x, ${hero1} 1x, ${hero2} 0.5x`}
+            src={hero_image}
+            alt="hero"
+            type="image/webp"
+            sizes="
+            (min-width: 650px) and (max-width: 1000px) 350px,
+            (max-width: 650px) 515px,
+            100vw"
+            loading="lazy"
+          />
+        </picture>
       </div>
     </section>
   );

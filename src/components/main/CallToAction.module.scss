@@ -18,7 +18,7 @@
       width: 80%;
       gap: 2rem;
     }
-    @media screen and (max-width: 750px) {
+    @media screen and (max-width: 650px) {
       width: 80%;
       gap: 4rem;
       flex-direction: column-reverse;
@@ -55,10 +55,16 @@
     line-height: 1.4;
     margin-top: 2rem;
     font-weight: 400;
+    margin-bottom: 3rem;
+
+    @media screen and (max-width: 950px) {
+      margin-top: 1rem;
+      margin-bottom: 2rem;
+    }
   }
 
   button {
-    margin-top: 4rem;
+    // margin-top: 4rem;
   }
   &__image {
     flex-basis: 50%;
@@ -68,7 +74,7 @@
     flex-shrink: 1;
     margin: auto;
 
-    @media screen and (max-width: 750px) {
+    @media screen and (max-width: 650px) {
       min-height: 30rem;
       width: 100%;
     }
