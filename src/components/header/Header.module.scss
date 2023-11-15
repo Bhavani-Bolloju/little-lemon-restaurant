@@ -65,9 +65,10 @@
   }
 
   &__logo {
-    width: 20%;
-    min-width: 15rem;
-    object-fit: cover;
+    width: 100%;
+    max-width: 20rem;
+    height: auto;
+    object-fit: contain;
   }
 
   &__nav {
