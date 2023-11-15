@@ -4,7 +4,6 @@ import greekSalad from "../../assets/little-lemon-assets/greek salad.jpg";
 import brushetta from "../../assets/little-lemon-assets/bruchetta.png";
 import lemonDessert from "../../assets/little-lemon-assets/lemon dessert.jpg";
 import PrimaryButton from "../ui/PrimaryButton";
-
 import icon from "../../assets/little-lemon-assets/delivery-icon.svg";
 
 const SpecialItem = function ({ image, title, price, text, id }) {

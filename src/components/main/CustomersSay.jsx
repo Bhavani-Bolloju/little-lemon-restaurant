@@ -1,9 +1,19 @@
 import React from "react";
 import classes from "./CustomerSays.module.scss";
-import akash from "../../assets/little-lemon-assets/akash.jpg";
-import andrea from "../../assets/little-lemon-assets/andrea.jpg";
-import engelsen from "../../assets/little-lemon-assets/engelsen.jpg";
-import campbell from "../../assets/little-lemon-assets/campbell.jpg";
+import ashi from "../../assets/testimonials/ashi.jpg";
+import ashi_large from "../../assets/testimonials/ashi.webp";
+import ashi_small from "../../assets/testimonials/ashi_small.webp";
+import andrea from "../../assets/testimonials/andrea.jpg";
+import andrea_large from "../../assets/testimonials/andrea_large.webp";
+import andrea_small from "../../assets/testimonials/andrea_small.webp";
+
+import engelsen from "../../assets/testimonials/engelsen.jpg";
+import engelsen_large from "../../assets/testimonials/andrea_large.webp";
+import engelsen_small from "../../assets/testimonials/engelsen_small.webp";
+
+import campbell from "../../assets/testimonials/campbell.jpg";
+import campbell_large from "../../assets/testimonials/campbell_large.webp";
+import campbell_small from "../../assets/testimonials/campbell_small.webp";
 
 function StarRating({ rating }) {
   const maxStars = 5;
@@ -39,22 +49,34 @@ function StarRating({ rating }) {
   return <ul className={classes["customerSays__rating"]}>{stars}</ul>;
 }
 
-function CustomerSaysItem({ name, profession, review, image, rating }) {
+function CustomerSaysItem({
+  name,
+  profession,
+  review,
+  image_large,
+  image_small,
+  rating,
+  defaultImage
+}) {
   return (
     <li className={classes["customerSays__item"]}>
       <blockquote className={classes["customerSays__quote"]}>
         <figure className={classes["customerSays__figure"]}>
           <img
-            src={image}
+            srcSet={`${image_large} 2x, ${image_small} 1x`}
+            sizes="(max-width: 650px) 35px, 45px"
+            src={defaultImage}
+            type="image/webp"
             alt={name}
             className={classes["customerSays__avatar"]}
+            loading="lazy"
           />
           <figcaption className={classes["customerSays__caption"]}>
             <p className={classes["customerSays__name"]}>{name}</p>
             <p className={classes["customerSays__profession"]}>{profession}</p>
           </figcaption>
         </figure>
-        {/* <p className={classes["customerSays__rating"]}>{rating}</p> */}
+
         <StarRating rating={rating} />
         <p className={classes["customerSays__review"]}>{review}</p>
       </blockquote>
@@ -68,28 +90,36 @@ function CustomersSay() {
       <h2 className={classes["customerSays__heading"]}>testimonial</h2>
       <ul className={classes["customerSays__list"]}>
         <CustomerSaysItem
-          image={akash}
+          defaultImage={ashi}
+          image_small={ashi_small}
+          image_large={ashi_large}
           review="The unique blend of Mediterranean flavors and the cozy ambiance create a dining experience like no other."
-          name="akash"
+          name="ashi"
           profession="marketing"
           rating="5"
         />
         <CustomerSaysItem
-          image={campbell}
+          defaultImage={andrea}
+          image_small={andrea_small}
+          image_large={andrea_large}
           review="As an event planner, I'm always on the lookout for exquisite dining options. Little Lemon Restaurant never disappoints."
           name="campbell"
           profession="Event Planner"
           rating="5"
         />
         <CustomerSaysItem
-          image={engelsen}
+          defaultImage={engelsen}
+          image_small={engelsen_small}
+          image_large={engelsen_large}
           review=" I'm a tough critic when it comes to dining out. Little Lemon Restaurant impresses me with their exquisite cuisine"
           name="engelsen"
           profession="Chef"
           rating="4"
         />
         <CustomerSaysItem
-          image={andrea}
+          defaultImage={campbell}
+          image_small={campbell_small}
+          image_large={campbell_large}
           review="Little Lemon Restaurant has been my go-to for healthy and delicious Mediterranean mealse."
           name="andrea"
           profession="Health Nut"
