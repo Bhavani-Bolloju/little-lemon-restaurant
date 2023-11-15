@@ -1,6 +1,8 @@
 import React, { useReducer, useState } from "react";
 import BookingForm from "../components/booking/BookingForm";
-import restaurant from "../assets/little-lemon-assets/restaurant.jpg";
+import restaurant from "../assets/booking/restaurant.jpg";
+import restaurant_large from "../assets/booking/restaurant_large.webp";
+import restaurant_small from "../assets/booking/restaurant_small.webp";
 import classes from "./BookingPage.module.scss";
 import back from "../assets/little-lemon-assets/back.svg";
 import { useNavigate } from "react-router-dom";
@@ -150,7 +152,12 @@ function BookingPage() {
       </header>
       <main className={classes["booking-page__main"]}>
         <div className={classes["booking-page__image"]}>
-          <img src={restaurant} alt="" />
+          <img
+            srcSet={`${restaurant_large} 2x, ${restaurant_small} 1x`}
+            sizes="(max-width: 650px) 600px, 750px"
+            src={restaurant}
+            alt=""
+          />
         </div>
         <section className={classes["booking-page__form-container"]}>
           <h2 className={classes["booking-page__main--title"]}>
@@ -164,9 +171,12 @@ function BookingPage() {
       </main>
       <footer className={classes["booking-page__footer"]}>
         <div className={classes["booking-page__logo"]}>
-          <div className={classes["booking-page__logo-image"]}>
-            <img src={logo} alt="little lemon logo" />
-          </div>
+          <img
+            src={logo}
+            className={classes["booking-page__logo-image"]}
+            alt="little lemon logo"
+          />
+
           <p className={classes["booking-page__logo-text"]}>
             We are a family owned Mediterranean restaurant, focused on
             traditional recipes served with a modern twist
