@@ -61,7 +61,7 @@
 .image__restaurant {
   position: absolute;
   width: 50%;
-  height: 70%;
+  height: 30rem;
   z-index: 100;
   overflow: hidden;
   top: 0%;
@@ -69,13 +69,13 @@
   border-radius: 1rem;
   box-shadow: 0 5px 20px 10px rgba(0, 0, 0, 0.08);
 
-  @media screen and (min-width: 1200px) {
-    height: 100%;
-  }
-
   &:last-child {
     left: 10%;
     top: 30%;
+  }
+
+  @media screen and (max-width: 750px) {
+    height: 25rem;
   }
 
   img {

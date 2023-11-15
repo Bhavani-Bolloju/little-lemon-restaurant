@@ -8,9 +8,7 @@ function Footer() {
   return (
     <footer className={classes.footer}>
       <div className={classes["footer__container"]}>
-        <div className={classes["footer__logo"]}>
-          <img src={logo} alt="logo" />
-        </div>
+        <img src={logo} alt="logo" className={classes["footer__logo"]} />
         <div className={classes["footer__links"]}>
           <section className={classes["links__dormant"]}>
             <h3>dormant navigation</h3>

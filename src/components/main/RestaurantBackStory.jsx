@@ -1,6 +1,15 @@
 import React from "react";
 import classes from "./RestaurantBackStory.module.scss";
-import chef1 from "../../assets/little-lemon-assets/Mario and Adrian A.jpg";
+
+import MandA_large from "../../assets/restaurant-backstory/Mario and Adrian A.webp";
+import MandA_small from "../../assets/restaurant-backstory/Mario and Adrian A-small.webp";
+import MandA from "../../assets/restaurant-backstory/Mario and Adrian-A.jpg";
+
+import MandA2 from "../../assets/restaurant-backstory/Mario and Adrian-B.jpg";
+
+import MandA2_small from "../../assets/restaurant-backstory/Mario and Adrian b_small.webp";
+
+import MandA2_large from "../../assets/restaurant-backstory/Mario and Adrian b__large.webp";
 
 import chef2 from "../../assets/little-lemon-assets/Mario and Adrian b.jpg";
 
@@ -20,12 +29,30 @@ function RestaurantBackStory() {
         </p>
       </div>
       <div className={classes["restaurantBackStory__images"]}>
-        <div className={classes["image__restaurant"]}>
-          <img src={chef1} alt="" />
-        </div>
-        <div className={classes["image__restaurant"]}>
-          <img src={chef2} alt="" />
-        </div>
+        <picture className={classes["image__restaurant"]}>
+          <img
+            srcSet={`${MandA_large} 2x, ${MandA_small} 1x`}
+            src={MandA}
+            alt="Mario and adrian"
+            type="image/webp"
+            sizes="
+            (max-width: 650px) 300px,
+            (max-width: 1200px) 250px"
+            loading="lazy"
+          />
+        </picture>
+        <picture className={classes["image__restaurant"]}>
+          <img
+            srcSet={`${MandA2_large} 2x, ${MandA2_small} 1x`}
+            src={MandA2}
+            alt="Mario and adrian"
+            type="image/webp"
+            sizes="
+            (max-width: 650px) 300px,
+            (max-width: 1200px) 250px"
+            loading="lazy"
+          />
+        </picture>
       </div>
     </section>
   );

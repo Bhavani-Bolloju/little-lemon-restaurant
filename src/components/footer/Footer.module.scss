@@ -24,16 +24,10 @@
   }
 
   &__logo {
-    flex-basis: 30%;
-    text-align: center;
-
-    min-width: 15rem;
-
-    img {
-      width: 80%;
-      height: auto;
-      object-fit: cover;
-    }
+    width: 100%;
+    max-width: 20rem;
+    height: auto;
+    object-fit: contain;
   }
 
   &__links {
