@@ -1,11 +1,11 @@
 .bookingconfirmation {
-  background-color: var(--color-primary-2);
   min-height: 100vh;
   color: var(--color-primary-1);
+  padding: 5rem 0;
 
   &__image {
-    width: 100%;
-    height: 40vh;
+    width: 50%;
+    margin: auto;
     img {
       width: 100%;
       height: 100%;
@@ -20,6 +20,10 @@
     margin-top: 3rem;
     width: 45%;
     margin: 3rem auto 0;
+
+    @media screen and (max-width: 750px) {
+      width: 60%;
+    }
   }
 
   &__title {
@@ -27,6 +31,7 @@
     margin-bottom: 1rem;
     font-weight: 500;
     font-family: var(--font-Markazi);
+    text-align: center;
   }
 
   &__text {

@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 
 import classes from "./BookingConfirmationPage.module.scss";
-import restaurant from "../assets/little-lemon-assets/restaurant.jpg";
+
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
+
+import booking_confirmation from "../assets/little-lemon-assets/booking-confirmation.jpg";
 
 function BookingConfirmationPage() {
   const [user, setUser] = useState(null);
@@ -28,7 +30,7 @@ function BookingConfirmationPage() {
   return (
     <section className={classes["bookingconfirmation"]}>
       <figure className={classes["bookingconfirmation__image"]}>
-        <img src={restaurant} alt="" />
+        <img src={booking_confirmation} alt="" />
       </figure>
       <div className={classes["bookingconfirmation__content"]}>
         <h2 className={classes["bookingconfirmation__title"]}>

@@ -11,8 +11,6 @@ import MandA2_small from "../../assets/restaurant-backstory/Mario and Adrian b_s
 
 import MandA2_large from "../../assets/restaurant-backstory/Mario and Adrian b__large.webp";
 
-import chef2 from "../../assets/little-lemon-assets/Mario and Adrian b.jpg";
-
 function RestaurantBackStory() {
   return (
     <section className={classes.restaurantBackStory}>
