@@ -3,8 +3,6 @@ import classes from "./BookingForm.module.scss";
 import PrimaryButton from "../ui/PrimaryButton";
 import { useNavigate } from "react-router-dom";
 
-import { act } from "@testing-library/react";
-
 function BookingForm({ availableTimes, availabilityCheck }) {
   const [bookTable, setBookTable] = useState({
     selectedDate: "",
@@ -38,10 +36,8 @@ function BookingForm({ availableTimes, availabilityCheck }) {
     //   return { ...prev, [e.target.name]: e.target.value };
     // });
 
-    act(() => {
-      setBookTable((prev) => {
-        return { ...prev, [e.target.name]: e.target.value };
-      });
+    setBookTable((prev) => {
+      return { ...prev, [e.target.name]: e.target.value };
     });
   };
 
