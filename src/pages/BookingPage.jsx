@@ -11,7 +11,7 @@ import logo from "../assets/little-lemon-assets/Logo.svg";
 
 export const times = [];
 
-const initialState = {
+export const initialState = {
   times,
   isLoading: false,
   reservedSlots: null
@@ -137,7 +137,7 @@ function BookingPage() {
 
   return (
     <section className={classes["booking-page"]}>
-      {availableTimes?.isLoading && <p>Loading...</p>}
+      {availableTimes?.isLoading && <p data-testid="loading">Loading...</p>}
       <button className={classes["back__btn"]} onClick={() => navigate("/")}>
         <img src={back} alt="back to home page" />
       </button>

@@ -1,79 +1,63 @@
-import { render, waitFor, screen, act } from "@testing-library/react";
+import {
+  render,
+  waitFor,
+  screen,
+  act,
+  fireEvent
+} from "@testing-library/react";
 
 import { jest } from "@jest/globals";
-
-import userEvent from "@testing-library/user-event";
-import BookingPage from "./BookingPage";
 import { BrowserRouter } from "react-router-dom";
+import userEvent from "@testing-library/user-event";
+import nock from "nock";
 
-import { rest } from "msw";
-
-import { setupServer } from "msw/node";
+import BookingPage from "./BookingPage";
+import BookingForm from "../components/booking/BookingForm";
 
 import "@testing-library/jest-dom/extend-expect";
 
-//
+//testing useReducer hook
 
-// Create a mock server
-// const server = setupServer(
-//   // Define the handlers for different requests
-//   rest.get(
-//     "https://little-lemon-restaurant-4ced5-default-rtdb.firebaseio.com/restaurant_hours/:day",
-//     (req, res, ctx) => {
-//       // Simulate a successful response for available times
-//       return res(
-//         ctx.json({
-//           // Mock your data here
-//           // Example:
-//           time1: "12:00 PM",
-//           time2: "1:00 PM"
-//           // ...
-//         }),
-//         ctx.status(200)
-//       );
-//     }
-//   ),
-//   rest.get(
-//     "https://little-lemon-restaurant-4ced5-default-rtdb.firebaseio.com/reservations.json",
-//     (req, res, ctx) => {
-//       // Simulate a successful response for reserved slots
-//       return res(
-//         ctx.json({
-//           // Mock your data here
-//           // Example:
-//           reservation1: { selectedTime: "12:00 PM" },
-//           reservation2: { selectedTime: "1:00 PM" }
-//           // ...
-//         }),
-//         ctx.status(200)
-//       );
-//     }
-//   )
-// );
+import { updateTimes, initializeTimes, initialState } from "./BookingPage";
 
-// //mocking global fetch function
+test("update times in state", () => {
+  const action = {
+    type: "SET_TIMES",
+    times: ["9.30 PM - 10.30 PM", "10.30 PM - 11.30 PM"]
+  };
 
-// global.fetch = jest.fn();
+  const newState = updateTimes(initialState, action);
+  expect(newState.times).toEqual(["9.30 PM - 10.30 PM", "10.30 PM - 11.30 PM"]);
+  expect(newState.isLoading).toEqual(false);
+  expect(newState.reservedSlots).toEqual(null);
+});
 
-// //function to set up different fetch responses
+test("update loading state", () => {
+  const action = { type: "LOADING", loading: true };
+  const newState = updateTimes(initialState, action);
 
-// const setupFetchResponses = function (status, data) {
-//   global.fetch.mockResolvedValueOnce({
-//     ok: status === "success",
-//     json: () => Promise.resolve(data)
-//   });
-// };
+  expect(newState.isLoading).toEqual(true);
 
-// test("fetching available times in loading state", async () => {
-//   setupFetchResponses("loading", {});
+  expect(newState.times).toEqual([]);
+  expect(newState.reservedSlots).toEqual(null);
+});
 
-//   render(
-//     <BrowserRouter>
-//       <BookingPage />
-//     </BrowserRouter>
-//   );
+test("update reserved slots state", () => {
+  const action = {
+    type: "RESERVED_SLOTS",
+    reservedSlots: ["9.30 PM - 10.30 PM"]
+  };
 
-//   // userEvent.click(screen.getByLabelText("Choose Date:"));
+  const newState = updateTimes(initialState, action);
 
-//   // expect(screen.getByText("Loading...")).toBeInTheDocument();
-// });
+  expect(newState.reservedSlots).toEqual(["9.30 PM - 10.30 PM"]);
+
+  expect(newState.isLoading).toEqual(false);
+  expect(newState.times).toEqual([]);
+});
+
+test("no action type match", () => {
+  const action = { type: "UNKNOWN_ACTION" };
+  const newState = updateTimes(initialState, action);
+  expect(newState).toEqual(initialState);
+});

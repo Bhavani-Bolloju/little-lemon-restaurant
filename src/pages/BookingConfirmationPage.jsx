@@ -30,7 +30,11 @@ function BookingConfirmationPage() {
   return (
     <section className={classes["bookingconfirmation"]}>
       <figure className={classes["bookingconfirmation__image"]}>
-        <img src={booking_confirmation} alt="" />
+        <img
+          src={booking_confirmation}
+          alt="booking confirmation"
+          loading="lazy"
+        />
       </figure>
       <div className={classes["bookingconfirmation__content"]}>
         <h2 className={classes["bookingconfirmation__title"]}>
