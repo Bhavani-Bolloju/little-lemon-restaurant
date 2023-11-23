@@ -9,55 +9,70 @@ import {
 import { jest } from "@jest/globals";
 import { BrowserRouter } from "react-router-dom";
 import userEvent from "@testing-library/user-event";
-import nock from "nock";
+// import nock from "nock";
 
 import BookingPage from "./BookingPage";
-import BookingForm from "../components/booking/BookingForm";
+// import BookingForm from "../components/booking/BookingForm";
 
 import "@testing-library/jest-dom/extend-expect";
 
-//testing useReducer hook
+import { updateTimes, initialState } from "./BookingPage";
 
-import { updateTimes, initializeTimes, initialState } from "./BookingPage";
+//mock the fetch function
 
-test("update times in state", () => {
-  const action = {
-    type: "SET_TIMES",
-    times: ["9.30 PM - 10.30 PM", "10.30 PM - 11.30 PM"]
-  };
+// jest.mock("node-fetch");
 
-  const newState = updateTimes(initialState, action);
-  expect(newState.times).toEqual(["9.30 PM - 10.30 PM", "10.30 PM - 11.30 PM"]);
-  expect(newState.isLoading).toEqual(false);
-  expect(newState.reservedSlots).toEqual(null);
+test("calling handler when date is selected and make fetch call", () => {
+  render(
+    <BrowserRouter>
+      <BookingPage />
+    </BrowserRouter>
+  );
 });
 
-test("update loading state", () => {
-  const action = { type: "LOADING", loading: true };
-  const newState = updateTimes(initialState, action);
+describe("update fetch data", () => {
+  test("update times in state", () => {
+    const action = {
+      type: "SET_TIMES",
+      times: ["9.30 PM - 10.30 PM", "10.30 PM - 11.30 PM"]
+    };
 
-  expect(newState.isLoading).toEqual(true);
+    const newState = updateTimes(initialState, action);
+    expect(newState.times).toEqual([
+      "9.30 PM - 10.30 PM",
+      "10.30 PM - 11.30 PM"
+    ]);
+    expect(newState.isLoading).toEqual(false);
+    expect(newState.reservedSlots).toEqual(null);
+  });
 
-  expect(newState.times).toEqual([]);
-  expect(newState.reservedSlots).toEqual(null);
-});
+  test("update loading state", () => {
+    const action = { type: "LOADING", loading: true };
+    const newState = updateTimes(initialState, action);
 
-test("update reserved slots state", () => {
-  const action = {
-    type: "RESERVED_SLOTS",
-    reservedSlots: ["9.30 PM - 10.30 PM"]
-  };
+    expect(newState.isLoading).toEqual(true);
 
-  const newState = updateTimes(initialState, action);
+    expect(newState.times).toEqual([]);
+    expect(newState.reservedSlots).toEqual(null);
+  });
 
-  expect(newState.reservedSlots).toEqual(["9.30 PM - 10.30 PM"]);
+  test("update reserved slots state", () => {
+    const action = {
+      type: "RESERVED_SLOTS",
+      reservedSlots: ["9.30 PM - 10.30 PM"]
+    };
 
-  expect(newState.isLoading).toEqual(false);
-  expect(newState.times).toEqual([]);
-});
+    const newState = updateTimes(initialState, action);
 
-test("no action type match", () => {
-  const action = { type: "UNKNOWN_ACTION" };
-  const newState = updateTimes(initialState, action);
-  expect(newState).toEqual(initialState);
+    expect(newState.reservedSlots).toEqual(["9.30 PM - 10.30 PM"]);
+
+    expect(newState.isLoading).toEqual(false);
+    expect(newState.times).toEqual([]);
+  });
+
+  test("no action type match", () => {
+    const action = { type: "UNKNOWN_ACTION" };
+    const newState = updateTimes(initialState, action);
+    expect(newState).toEqual(initialState);
+  });
 });

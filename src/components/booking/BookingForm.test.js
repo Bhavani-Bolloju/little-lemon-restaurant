@@ -28,9 +28,42 @@ test("displays error when date field is empty", () => {
   );
 });
 
-//write test for time options fetched from firebase
+//test for writing time
 
-test("display available times", () => {});
+test("rendering times array", () => {
+  const times = ["9.30 PM - 10.30 PM", "10.30 PM - 11.30 PM"];
+
+  render(
+    <BrowserRouter>
+      <BookingForm availableTimes={times} availabilityCheck={() => {}} />
+    </BrowserRouter>
+  );
+
+  const timeInput = screen.getByLabelText("time:");
+  expect(timeInput).toBeInTheDocument();
+
+  times.forEach((time) => {
+    const optionEl = screen.getByText(time);
+    expect(optionEl).toBeInTheDocument();
+  });
+});
+
+test("update selected time on drop down change", () => {
+  const times = ["9.30 PM - 10.30 PM", "10.30 PM - 11.30 PM"];
+
+  render(
+    <BrowserRouter>
+      <BookingForm availableTimes={times} availabilityCheck={() => {}} />
+    </BrowserRouter>
+  );
+
+  const timeInput = screen.getByLabelText("time:");
+  expect(timeInput).toBeInvalid();
+
+  fireEvent.change(timeInput, { target: { value: "9.30 PM - 10.30 PM" } });
+
+  expect(timeInput).toHaveValue("9.30 PM - 10.30 PM");
+});
 
 test("display error when occasion is empty", () => {
   render(

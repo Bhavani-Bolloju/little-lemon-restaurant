@@ -17,8 +17,6 @@ function BookingForm({ availableTimes, availabilityCheck }) {
 
   const navigate = useNavigate();
 
-  // console.log(availableTimes, "times arr");
-
   const inputHandler = function (e) {
     if (e.target.name === "selectedDate") {
       const selectedDate = e.target.value;
@@ -60,8 +58,6 @@ function BookingForm({ availableTimes, availabilityCheck }) {
       return;
     }
 
-    // console.log("clicked");
-
     try {
       const request = await fetch(
         `https://little-lemon-restaurant-4ced5-default-rtdb.firebaseio.com/reservations.json`,
@@ -92,20 +88,28 @@ function BookingForm({ availableTimes, availabilityCheck }) {
     });
   };
 
-  // console.log(bookTable.selectedDate);
+  let isDisabled = true;
+
+  if (
+    bookTable.selectedDate.trim() !== "" &&
+    bookTable.selectedTime.trim() !== "" &&
+    bookTable.seatingOption.trim() !== "" &&
+    bookTable.numberOfDiners > 0 &&
+    bookTable.comments.trim() !== "" &&
+    bookTable.occasion.trim() !== ""
+  ) {
+    isDisabled = false;
+  }
 
   return (
     <form className={classes.bookingForm} onSubmit={formSubmitHandler}>
       <div className={classes["bookingForm__container"]}>
         <div className={classes["input__controls"]}>
-          <label
-            htmlFor="selectedDate"
-            // id="selectedDate"
-          >
+          <label htmlFor="selectedDate" id="selectedDate">
             choose date:
           </label>
           <input
-            // aria-labelledby="selectedDate"
+            aria-labelledby="selectedDate"
             id="selectedDate"
             min={new Date().toISOString().split("T")[0]}
             name="selectedDate"
@@ -127,9 +131,9 @@ function BookingForm({ availableTimes, availabilityCheck }) {
             value={bookTable.selectedTime}
             onChange={inputHandler}
           >
-            {/* {availableTimes?.length <= 1 && (
-              <option value={bookTable.selectedTime}>00:00</option>
-            )} */}
+            <option value={bookTable.selectedTime} disabled>
+              select an option
+            </option>
             {availableTimes?.map((time, i) => (
               <option key={i} value={time}>
                 {time}
@@ -181,7 +185,6 @@ function BookingForm({ availableTimes, availabilityCheck }) {
               id="indoor"
               name="seatingOption"
               value="indoor"
-              // checked={bookTable.seatingOption === "indoor"}
               onChange={inputHandler}
               required
             />
@@ -193,7 +196,6 @@ function BookingForm({ availableTimes, availabilityCheck }) {
               id="outdoor"
               name="seatingOption"
               value="outdoor"
-              // checked={bookTable.seatingOption === "outdoor"}
               onChange={inputHandler}
               required
             />
@@ -217,7 +219,9 @@ function BookingForm({ availableTimes, availabilityCheck }) {
           </p>
         </div>
 
-        <PrimaryButton>confirm your reservation</PrimaryButton>
+        <PrimaryButton disabled={isDisabled}>
+          confirm your reservation
+        </PrimaryButton>
       </div>
     </form>
   );

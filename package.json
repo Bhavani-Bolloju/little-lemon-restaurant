@@ -41,6 +41,7 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
-    "nock": "^13.3.8"
+    "nock": "^13.3.8",
+    "node-fetch": "^3.3.2"
   }
 }

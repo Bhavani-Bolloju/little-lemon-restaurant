@@ -1,4 +1,4 @@
-import React, { useReducer, useState } from "react";
+import React, { useReducer } from "react";
 import BookingForm from "../components/booking/BookingForm";
 import restaurant from "../assets/booking/restaurant.jpg";
 import restaurant_large from "../assets/booking/restaurant_large.webp";
@@ -51,11 +51,8 @@ export const initializeTimes = function () {
 function BookingPage() {
   const [availableTimes, dispatch] = useReducer(updateTimes, initializeTimes());
 
-  // console.log(availableTimes);
-
   const navigate = useNavigate();
 
-  //
   const fetchAvailableTimes = function (selectedDate) {
     const selectedDay = new Date(selectedDate).toLocaleDateString("en-US", {
       weekday: "long"
