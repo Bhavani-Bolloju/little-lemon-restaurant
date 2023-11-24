@@ -46,7 +46,6 @@ function BookingForm({ availableTimes, availabilityCheck }) {
   const formSubmitHandler = async function (e) {
     e.preventDefault();
 
-    console.log(bookTable);
     if (
       bookTable.selectedDate.trim() === "" ||
       bookTable.selectedTime.trim() === "" ||
@@ -69,10 +68,8 @@ function BookingForm({ availableTimes, availabilityCheck }) {
           body: JSON.stringify(bookTable)
         }
       );
-
       if (!request.ok) throw new Error("Failed to send data");
       const res = await request.json();
-
       navigate(`/bookingConfirm/${res.name}`);
     } catch (error) {
       alert(error.message);
