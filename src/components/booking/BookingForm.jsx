@@ -5,6 +5,22 @@ import { useNavigate } from "react-router-dom";
 
 import { act } from "@testing-library/react";
 
+export const fetchReq = async function (bookTable) {
+  const request = await fetch(
+    `https://little-lemon-restaurant-4ced5-default-rtdb.firebaseio.com/reservations.json`,
+    {
+      method: "POST",
+      headers: {
+        "content-type": "application/json"
+      },
+      body: JSON.stringify(bookTable)
+    }
+  );
+  if (!request.ok) throw new Error("Failed to send data");
+  const res = await request.json();
+  return res;
+};
+
 function BookingForm({ availableTimes, availabilityCheck }) {
   const [bookTable, setBookTable] = useState({
     selectedDate: "",
@@ -58,18 +74,20 @@ function BookingForm({ availableTimes, availabilityCheck }) {
     }
 
     try {
-      const request = await fetch(
-        `https://little-lemon-restaurant-4ced5-default-rtdb.firebaseio.com/reservations.json`,
-        {
-          method: "POST",
-          headers: {
-            "content-type": "application/json"
-          },
-          body: JSON.stringify(bookTable)
-        }
-      );
-      if (!request.ok) throw new Error("Failed to send data");
-      const res = await request.json();
+      // const request = await fetch(
+      //   `https://little-lemon-restaurant-4ced5-default-rtdb.firebaseio.com/reservations.json`,
+      //   {
+      //     method: "POST",
+      //     headers: {
+      //       "content-type": "application/json"
+      //     },
+      //     body: JSON.stringify(bookTable)
+      //   }
+      // );
+      // if (!request.ok) throw new Error("Failed to send data");
+      // const res = await request.json();
+
+      const res = await fetchReq(bookTable);
       navigate(`/bookingConfirm/${res.name}`);
     } catch (error) {
       alert(error.message);
@@ -128,7 +146,7 @@ function BookingForm({ availableTimes, availabilityCheck }) {
             value={bookTable.selectedTime}
             onChange={inputHandler}
           >
-            <option value={bookTable.selectedTime} disabled>
+            <option value="" disabled>
               select an option
             </option>
             {availableTimes?.map((time, i) => (
