@@ -63,10 +63,16 @@
     }
   }
 
-  &__logo {
+  &__logo-container {
     width: 100%;
     max-width: 20rem;
-    height: auto;
+    height: 5rem;
+    // padding-bottom: 25%;
+  }
+
+  &__logo {
+    width: 100%;
+    height: 100%;
     object-fit: contain;
   }
 

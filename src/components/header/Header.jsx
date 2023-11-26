@@ -9,7 +9,9 @@ function Header() {
 
   return (
     <header className={classes.header}>
-      <img src={logo} alt="logo" className={classes["header__logo"]} />
+      <div className={classes["header__logo-container"]}>
+        <img src={logo} alt="logo" className={classes["header__logo"]} />
+      </div>
       <div
         className={`${classes["nav__container"]} ${
           isDrawerOpen && classes["nav__container--active"]
