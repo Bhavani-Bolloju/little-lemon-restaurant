@@ -27,6 +27,8 @@ function BookingConfirmationPage() {
     }
   }, [id]);
 
+  console.log(user);
+
   return (
     <section className={classes["bookingconfirmation"]}>
       <figure className={classes["bookingconfirmation__image"]}>
@@ -74,7 +76,7 @@ function BookingConfirmationPage() {
               <strong className={classes["bookingconfirmation__label"]}>
                 Occasion:
               </strong>
-              {user?.occassion}
+              {user?.occasion}
             </li>
           </ul>
         )}

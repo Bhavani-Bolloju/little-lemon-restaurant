@@ -39,6 +39,11 @@ export const updateTimes = function (state, action) {
       reservedSlots: action.reservedSlots
     };
   }
+
+  if (action.type === "RESET") {
+    return initialState;
+  }
+
   return state;
 };
 
@@ -75,8 +80,6 @@ function BookingPage() {
       } catch (error) {
         alert(error.message);
       }
-
-      dispatch({ type: "LOADING", loading: false });
     };
 
     fetchTimingsForSelectedDay(selectedDay);
@@ -86,7 +89,7 @@ function BookingPage() {
 
     const fetchReservedSlots = async function () {
       try {
-        dispatch({ type: "LOADING", loading: true });
+        // dispatch({ type: "LOADING", loading: true });
         const request = await fetch(reservationsURL);
         if (!request.ok)
           throw new Error(
@@ -96,13 +99,11 @@ function BookingPage() {
         const res = await request.json();
 
         dispatch({ type: "RESERVED_SLOTS", reservedSlots: res });
-
-        // setReservedSlots(res);
       } catch (error) {
         alert(error.message);
+      } finally {
+        dispatch({ type: "LOADING", loading: false });
       }
-
-      dispatch({ type: "LOADING", loading: false });
     };
 
     fetchReservedSlots();
@@ -112,6 +113,7 @@ function BookingPage() {
   let filteredAvailableTimes = [];
 
   let bookedSlots = [];
+
   if (availableTimes?.reservedSlots && availableTimes?.times?.length > 0) {
     // eslint-disable-next-line
     for (const [_, obj] of Object.entries(availableTimes?.reservedSlots)) {
@@ -122,6 +124,17 @@ function BookingPage() {
       (time) => !bookedSlots.includes(time)
     );
   }
+
+  if (
+    availableTimes?.reservedSlots &&
+    availableTimes?.times?.length > 0 &&
+    bookedSlots.length === availableTimes?.times.length
+  ) {
+    alert("all slots reserved, please choose a different date");
+    dispatch({ type: "RESET" });
+  }
+
+  console.log(availableTimes);
 
   return (
     <section className={classes["booking-page"]}>
