@@ -9,6 +9,8 @@ import { useNavigate } from "react-router-dom";
 
 import logo from "../assets/little-lemon-assets/Logo.svg";
 
+import Spinner from "../components/ui/Spinner";
+
 export const times = [];
 
 export const initialState = {
@@ -201,6 +203,12 @@ function BookingPage() {
           </ul>
         </div>
       </footer>
+      {availableTimes?.isLoading && (
+        <div className={classes["booking-page__modal"]}>
+          <p>please wait while we get available times</p>
+          <Spinner />
+        </div>
+      )}
     </section>
   );
 }
