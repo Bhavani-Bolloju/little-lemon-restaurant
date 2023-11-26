@@ -1,15 +1,15 @@
 import React from "react";
 import classes from "./RestaurantBackStory.module.scss";
 
-import MandA_large from "../../assets/restaurant-backstory/Mario and Adrian A.webp";
-import MandA_small from "../../assets/restaurant-backstory/Mario and Adrian A-small.webp";
-import MandA from "../../assets/restaurant-backstory/Mario and Adrian-A.jpg";
+import MandA_large from "../../assets/restaurant-backstory/Mario-and-Adrian_A.webp";
+import MandA_small from "../../assets/restaurant-backstory/Mario-and-Adrian_A-small.webp";
+import MandA from "../../assets/restaurant-backstory/Mario-and-Adrian-A.jpg";
 
-import MandA2 from "../../assets/restaurant-backstory/Mario and Adrian-B.jpg";
+import MandA2 from "../../assets/restaurant-backstory/Mario-and-Adrian-B.jpg";
 
-import MandA2_small from "../../assets/restaurant-backstory/Mario and Adrian b_small.webp";
+import MandA2_small from "../../assets/restaurant-backstory/Mario-and-Adrian_b_small.webp";
 
-import MandA2_large from "../../assets/restaurant-backstory/Mario and Adrian b__large.webp";
+import MandA2_large from "../../assets/restaurant-backstory/Mario-and-Adrian_b__large.webp";
 
 function RestaurantBackStory() {
   return (
