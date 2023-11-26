@@ -32,7 +32,7 @@ const SpecialItem = function ({
         <img
           srcSet={`${image_large} 2x, ${image_small} 1x`}
           sizes="(min-width: 750px) 600px, 400px"
-          // src={defaultImage}
+          src={defaultImage}
           alt={title}
           loading="lazy"
         />
@@ -43,7 +43,10 @@ const SpecialItem = function ({
           <p className={classes["specials__item--price"]}>{price}</p>
         </div>
         <p className={classes["specials__item--text"]}>{text}</p>
-        <button className={classes["specials__item--btn"]}>
+        <button
+          className={classes["specials__item--btn"]}
+          label="order delivery"
+        >
           <span>order to delivery</span>
           <img src={icon} alt="delivery icon" />
         </button>
@@ -56,7 +59,7 @@ function Specials() {
   return (
     <section className={classes.specials}>
       <h2 className={classes["specials__title"]}>This weeks special!</h2>
-      <PrimaryButton>online menu</PrimaryButton>
+      <PrimaryButton label="online menu">online menu</PrimaryButton>
       <ul className={classes["specials__list"]}>
         <SpecialItem
           title="greek salad"

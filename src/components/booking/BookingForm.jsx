@@ -217,7 +217,7 @@ function BookingForm({ availableTimes, availabilityCheck }) {
           </p>
         </div>
 
-        <PrimaryButton disabled={isDisabled}>
+        <PrimaryButton disabled={isDisabled} label="submit form">
           confirm your reservation
         </PrimaryButton>
       </div>

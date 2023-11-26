@@ -20,8 +20,9 @@ function Header() {
 
       {!isDrawerOpen ? (
         <button
-          className={`${classes["header__nav--btn"]} ${classes["header__nav--open"]}`}
+          className={`${classes["header__nav--btn"]} `}
           onClick={() => setIsDrawerOpen(true)}
+          aria-label="open menu"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -40,8 +41,9 @@ function Header() {
         </button>
       ) : (
         <button
-          className={`${classes["header__nav--btn"]} ${classes["header__nav--close"]}`}
+          className={`${classes["header__nav--btn"]}`}
           onClick={() => setIsDrawerOpen(false)}
+          aria-label="close menu"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

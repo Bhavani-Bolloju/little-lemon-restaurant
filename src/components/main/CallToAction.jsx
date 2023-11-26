@@ -23,7 +23,10 @@ function CallToAction() {
             that's both familiar and exciting.
           </p>
 
-          <PrimaryButton onClick={() => navigate("/booking")}>
+          <PrimaryButton
+            onClick={() => navigate("/booking")}
+            label="reserve a table"
+          >
             reserve a table
           </PrimaryButton>
         </div>
