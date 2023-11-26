@@ -37,9 +37,9 @@ function CallToAction() {
             alt="hero"
             type="image/webp"
             sizes="
-            (min-width: 650px) and (max-width: 1000px) 350px,
-            (max-width: 650px) 515px,
-            100vw"
+            (min-width: 1200px) 450px,
+            (min-width: 800px) 300px,
+            500px"
             loading="lazy"
           />
         </picture>
