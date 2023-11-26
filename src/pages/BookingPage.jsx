@@ -123,15 +123,6 @@ function BookingPage() {
     );
   }
 
-  let allSlotsReserved = true;
-  if (availableTimes?.reservedSlots && filteredAvailableTimes?.length === 0) {
-    allSlotsReserved = false;
-  }
-
-  if (!allSlotsReserved) {
-    alert("all slots booked");
-  }
-
   return (
     <section className={classes["booking-page"]}>
       {availableTimes?.isLoading && <p data-testid="loading">Loading...</p>}

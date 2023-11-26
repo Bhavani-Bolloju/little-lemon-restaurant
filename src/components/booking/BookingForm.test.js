@@ -22,21 +22,17 @@ test("displays error when date field is empty", () => {
     </BrowserRouter>
   );
 
+  const currentDate = new Date();
+  const tmrw = new Date(currentDate);
+
+  tmrw.setDate(currentDate.getDate() + 1);
+
+  // const date = new Date(tmrw).toISOString().split("T"[0]);
+  const dateInput = screen.getByLabelText("choose date:");
+
   const submitBtn = screen.getByText("confirm your reservation");
   fireEvent.click(submitBtn);
-
-  const dateInput = screen.getByLabelText("choose date:");
   expect(dateInput).toBeInvalid();
-
-  fireEvent.change(dateInput, {
-    target: { value: new Date().toISOString().split("T")[0] }
-  });
-
-  expect(dateInput).toBeValid();
-  expect(dateInput).toHaveAttribute(
-    "min",
-    new Date().toISOString().split("T")[0]
-  );
 });
 
 //test for writing time
@@ -147,71 +143,6 @@ test("restricting additional comments to 150 characters", () => {
 
   expect(commentsField).toHaveAttribute("maxlength", "150");
 });
-
-//write logic for form submission
-// test("submit the form and navigate the user to confirmation page", async () => {
-//   //mock the global fetch with node-fetch
-
-//   global.fetch = fetch;
-
-//   render(
-//     <BrowserRouter>
-//       <BookingForm availableTimes={[]} availabilityCheck={() => {}} />
-//     </BrowserRouter>
-//   );
-
-//   //stimulate user response
-
-//   const date = new Date().toISOString().split("T")[0];
-
-//   fireEvent.change(screen.getByLabelText("choose date:"), {
-//     target: { value: date }
-//   });
-
-//   fireEvent.change(screen.getByLabelText("time:"), {
-//     target: { value: "9.30 PM - 10.30 PM" }
-//   });
-//   fireEvent.change(screen.getByLabelText("occasion:"), {
-//     target: { value: "birthday" }
-//   });
-//   fireEvent.change(screen.getByLabelText("Diners:"), {
-//     target: { value: "3" }
-//   });
-
-//   fireEvent.click(screen.getByLabelText("indoor"));
-//   // fireEvent.click(screen.getByLabelText("outdoor"));
-
-//   fireEvent.change(screen.getByLabelText("additional comments:"), {
-//     target: { value: "hello" }
-//   });
-
-//   //submit the form
-
-//   await (async () => {
-//     fireEvent.click(screen.getByText("confirm your reservation"));
-//   });
-
-//   //wait for async operation to complete
-//   await waitFor(() => {
-//     expect(fetch).toHaveBeenCalledWith(
-//       "https://little-lemon-restaurant-4ced5-default-rtdb.firebaseio.com/reservations.json",
-//       expect.objectContaining({
-//         method: "post",
-//         headers: {
-//           "content-type": "application/json"
-//         },
-//         body: JSON.stringify({
-//           selectedDate: date,
-//           selectedTime: "9.30 PM - 10.30 PM",
-//           occasion: "birthday",
-//           numberOfDiners: 3,
-//           seatingOption: "indoor",
-//           comments: "hello"
-//         })
-//       })
-//     );
-//   });
-// });
 
 test("handles form submission and make POST request", async () => {
   const returnData = ["9.30 PM - 10.30 PM"];

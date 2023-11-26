@@ -48,10 +48,6 @@ function BookingForm({ availableTimes, availabilityCheck }) {
       }
     }
 
-    // setBookTable((prev) => {
-    //   return { ...prev, [e.target.name]: e.target.value };
-    // });
-
     act(() => {
       setBookTable((prev) => {
         return { ...prev, [e.target.name]: e.target.value };
@@ -74,19 +70,6 @@ function BookingForm({ availableTimes, availabilityCheck }) {
     }
 
     try {
-      // const request = await fetch(
-      //   `https://little-lemon-restaurant-4ced5-default-rtdb.firebaseio.com/reservations.json`,
-      //   {
-      //     method: "POST",
-      //     headers: {
-      //       "content-type": "application/json"
-      //     },
-      //     body: JSON.stringify(bookTable)
-      //   }
-      // );
-      // if (!request.ok) throw new Error("Failed to send data");
-      // const res = await request.json();
-
       const res = await fetchReq(bookTable);
       navigate(`/bookingConfirm/${res.name}`);
     } catch (error) {
