@@ -27,8 +27,6 @@ function BookingConfirmationPage() {
     }
   }, [id]);
 
-  console.log(user);
-
   return (
     <section className={classes["bookingconfirmation"]}>
       <figure className={classes["bookingconfirmation__image"]}>

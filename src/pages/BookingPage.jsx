@@ -136,8 +136,6 @@ function BookingPage() {
     dispatch({ type: "RESET" });
   }
 
-  console.log(availableTimes);
-
   return (
     <section className={classes["booking-page"]}>
       {availableTimes?.isLoading && <p data-testid="loading">Loading...</p>}
