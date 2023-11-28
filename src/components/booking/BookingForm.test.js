@@ -15,6 +15,38 @@ afterAll(() => {
   fetchMock.mockReset();
 });
 
+test("display error when first name is empty", () => {
+  render(
+    <BrowserRouter>
+      <BookingForm availableTimes={[]} availabilityCheck={() => {}} />
+    </BrowserRouter>
+  );
+
+  const firstNameInput = screen.getByLabelText("first name:");
+
+  expect(firstNameInput).toBeInvalid();
+
+  fireEvent.change(firstNameInput, { target: { value: "joe" } });
+
+  expect(firstNameInput).toBeValid();
+});
+
+test("display error when last name is empty", () => {
+  render(
+    <BrowserRouter>
+      <BookingForm availableTimes={[]} availabilityCheck={() => {}} />
+    </BrowserRouter>
+  );
+
+  const lastNameInput = screen.getByLabelText("last name:");
+
+  expect(lastNameInput).toBeInvalid();
+
+  fireEvent.change(lastNameInput, { target: { value: "doe" } });
+
+  expect(lastNameInput).toBeValid();
+});
+
 test("displays error when date field is empty", () => {
   render(
     <BrowserRouter>
@@ -139,7 +171,7 @@ test("restricting additional comments to 150 characters", () => {
     </BrowserRouter>
   );
 
-  const commentsField = screen.getByLabelText("additional comments:");
+  const commentsField = screen.getByLabelText("special requests:");
 
   expect(commentsField).toHaveAttribute("maxlength", "150");
 });
@@ -175,7 +207,7 @@ test("handles form submission and make POST request", async () => {
 
   fireEvent.click(screen.getByLabelText("indoor"));
 
-  fireEvent.change(screen.getByLabelText("additional comments:"), {
+  fireEvent.change(screen.getByLabelText("special requests:"), {
     target: { value: "hello" }
   });
 

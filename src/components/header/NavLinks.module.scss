@@ -2,11 +2,24 @@
   ul {
     list-style: none;
     display: flex;
-    gap: 3rem;
+    gap: 2rem;
     color: var(--color-primary-1);
 
+    @media screen and (min-width: 750px) {
+      li {
+        padding: 0.5rem;
+        border-radius: 0.5rem;
+        transition: all 0.1s;
+      }
+
+      li:hover {
+        background-color: var(--color-primary-1);
+        color: var(--color-text-2);
+      }
+    }
+
     @media screen and (max-width: 950px) {
-      gap: 2rem;
+      gap: 1rem;
     }
     @media screen and (max-width: 750px) {
       gap: 1.5rem;

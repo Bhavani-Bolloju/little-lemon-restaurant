@@ -28,7 +28,9 @@ function BookingForm({ availableTimes, availabilityCheck }) {
     occasion: "",
     numberOfDiners: 0,
     seatingOption: "",
-    comments: ""
+    comments: "",
+    firstName: "",
+    lastName: ""
   });
 
   const navigate = useNavigate();
@@ -102,6 +104,36 @@ function BookingForm({ availableTimes, availabilityCheck }) {
   return (
     <form className={classes.bookingForm} onSubmit={formSubmitHandler}>
       <div className={classes["bookingForm__container"]}>
+        <div className={classes["input__controls"]}>
+          <label htmlFor="firstName" id="firstName">
+            first name:
+          </label>
+          <input
+            aria-labelledby="firstName"
+            id="firstName"
+            name="firstName"
+            type="text"
+            required
+            value={bookTable.firstName}
+            onChange={inputHandler}
+            placeholder="Your First Name"
+          />
+        </div>
+        <div className={classes["input__controls"]}>
+          <label htmlFor="lastName" id="lastName">
+            last name:
+          </label>
+          <input
+            aria-labelledby="lastName"
+            id="lastName"
+            name="lastName"
+            type="text"
+            required
+            value={bookTable.lastName}
+            onChange={inputHandler}
+            placeholder="Your Last Name"
+          />
+        </div>
         <div className={classes["input__controls"]}>
           <label htmlFor="selectedDate" id="selectedDate">
             choose date:
@@ -201,7 +233,7 @@ function BookingForm({ availableTimes, availabilityCheck }) {
           </div>
         </div>
         <div className={classes["additional-comments"]}>
-          <label htmlFor="comments">additional comments:</label>
+          <label htmlFor="comments">special requests:</label>
           <textarea
             name="comments"
             id="comments"
