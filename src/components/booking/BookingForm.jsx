@@ -19,17 +19,19 @@ export const fetchReq = async function (bookTable) {
   return res;
 };
 
+const initialState = {
+  selectedDate: "",
+  selectedTime: "",
+  occasion: "",
+  numberOfDiners: "",
+  seatingOption: "",
+  comments: "",
+  firstName: "",
+  lastName: ""
+};
+
 function BookingForm({ availableTimes, availabilityCheck }) {
-  const [bookTable, setBookTable] = useState({
-    selectedDate: "",
-    selectedTime: "",
-    occasion: "",
-    numberOfDiners: "",
-    seatingOption: "",
-    comments: "",
-    firstName: "",
-    lastName: ""
-  });
+  const [bookTable, setBookTable] = useState(initialState);
 
   const [isVisited, setIsVisited] = useState({
     selectedDate: false,
@@ -52,6 +54,15 @@ function BookingForm({ availableTimes, availabilityCheck }) {
         alert(
           "Sorry, the restaurant is closed on Sundays. Please choose a different date."
         );
+
+        setBookTable((prev) => {
+          return {
+            ...prev,
+            selectedDate: "",
+            selectedTime: ""
+          };
+        });
+        availabilityCheck("");
         return;
       } else {
         availabilityCheck(selectedDate);
@@ -110,14 +121,7 @@ function BookingForm({ availableTimes, availabilityCheck }) {
       alert(error.message);
     }
 
-    setBookTable({
-      selectedDate: "",
-      selectedTime: "",
-      occasion: "birthday",
-      numberOfDiners: 0,
-      seatingOption: "indoor",
-      comments: ""
-    });
+    setBookTable(initialState);
   };
 
   return (

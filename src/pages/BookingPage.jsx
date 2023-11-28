@@ -45,6 +45,9 @@ export const updateTimes = function (state, action) {
   if (action.type === "RESET") {
     return initialState;
   }
+  if (action.type === "NOT_AVAILABLE") {
+    return initialState;
+  }
 
   return state;
 };
@@ -64,6 +67,10 @@ function BookingPage() {
     const selectedDay = new Date(selectedDate).toLocaleDateString("en-US", {
       weekday: "long"
     });
+
+    if (selectedDate === "") {
+      dispatch({ type: "NOT_AVAILABLE" });
+    }
 
     const fetchTimingsForSelectedDay = async function (day) {
       try {
@@ -91,7 +98,6 @@ function BookingPage() {
 
     const fetchReservedSlots = async function () {
       try {
-        // dispatch({ type: "LOADING", loading: true });
         const request = await fetch(reservationsURL);
         if (!request.ok)
           throw new Error(
