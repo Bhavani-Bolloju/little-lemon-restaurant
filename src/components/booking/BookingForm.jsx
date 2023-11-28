@@ -3,8 +3,6 @@ import classes from "./BookingForm.module.scss";
 import PrimaryButton from "../ui/PrimaryButton";
 import { useNavigate } from "react-router-dom";
 
-import { act } from "@testing-library/react";
-
 export const fetchReq = async function (bookTable) {
   const request = await fetch(
     `https://little-lemon-restaurant-4ced5-default-rtdb.firebaseio.com/reservations.json`,
@@ -50,10 +48,8 @@ function BookingForm({ availableTimes, availabilityCheck }) {
       }
     }
 
-    act(() => {
-      setBookTable((prev) => {
-        return { ...prev, [e.target.name]: e.target.value };
-      });
+    setBookTable((prev) => {
+      return { ...prev, [e.target.name]: e.target.value };
     });
   };
 
