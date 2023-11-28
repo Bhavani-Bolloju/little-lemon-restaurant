@@ -24,7 +24,7 @@ function BookingForm({ availableTimes, availabilityCheck }) {
     selectedDate: "",
     selectedTime: "",
     occasion: "",
-    numberOfDiners: 0,
+    numberOfDiners: "",
     seatingOption: "",
     comments: "",
     firstName: "",
@@ -36,7 +36,7 @@ function BookingForm({ availableTimes, availabilityCheck }) {
     selectedTime: false,
     occasion: false,
     numberOfDiners: false,
-    // seatingOption: false,
+    seatingOption: false,
     firstName: false,
     lastName: false
   });
@@ -73,16 +73,10 @@ function BookingForm({ availableTimes, availabilityCheck }) {
         };
       });
     }
-
-    // console.log(isVisited[e.target.value]);
   };
 
   const visitHandler = function (e) {
     const key = e.target.name;
-
-    // if (e.target.vale)
-
-    console.log(e.target.name);
 
     if (e.target.value.trim().length === 0) {
       setIsVisited((prev) => {
@@ -103,8 +97,7 @@ function BookingForm({ availableTimes, availabilityCheck }) {
       bookTable.selectedDate.trim() === "" ||
       bookTable.selectedTime.trim() === "" ||
       bookTable.seatingOption.trim() === "" ||
-      bookTable.numberOfDiners < 0 ||
-      bookTable.comments.trim() === "" ||
+      bookTable.numberOfDiners.trim() === "" ||
       bookTable.occasion.trim() === ""
     ) {
       return;
@@ -146,6 +139,9 @@ function BookingForm({ availableTimes, availabilityCheck }) {
             onBlur={visitHandler}
             className={isVisited.firstName ? classes.invalid : null}
           />
+          {isVisited.firstName && (
+            <p className={classes.required}>This field is required</p>
+          )}
         </div>
         <div className={classes["input__controls"]}>
           <label htmlFor="lastName" id="lastName">
@@ -163,6 +159,10 @@ function BookingForm({ availableTimes, availabilityCheck }) {
             onBlur={visitHandler}
             className={isVisited.lastName ? classes.invalid : null}
           />
+
+          {isVisited.lastName && (
+            <p className={classes.required}>This field is required</p>
+          )}
         </div>
         <div className={classes["input__controls"]}>
           <label htmlFor="selectedDate" id="selectedDate">
@@ -180,6 +180,9 @@ function BookingForm({ availableTimes, availabilityCheck }) {
             onBlur={visitHandler}
             className={isVisited.selectedDate ? classes.invalid : null}
           />
+          {isVisited.selectedDate && (
+            <p className={classes.required}>This field is required</p>
+          )}
         </div>
         <div className={classes["input__controls"]}>
           <label htmlFor="selectedTime" id="selectedTime">
@@ -204,6 +207,10 @@ function BookingForm({ availableTimes, availabilityCheck }) {
               </option>
             ))}
           </select>
+
+          {isVisited.selectedTime && (
+            <p className={classes.required}>This field is required</p>
+          )}
         </div>
 
         <div className={classes["input__controls"]}>
@@ -227,6 +234,10 @@ function BookingForm({ availableTimes, availabilityCheck }) {
             <option value="engagement">Engagement</option>
             <option value="anniversary">Anniversary</option>
           </select>
+
+          {isVisited.occasion && (
+            <p className={classes.required}>This field is required</p>
+          )}
         </div>
         <div className={classes["input__controls"]}>
           <label htmlFor="diners" id="diners">
@@ -246,6 +257,10 @@ function BookingForm({ availableTimes, availabilityCheck }) {
             onBlur={visitHandler}
             className={isVisited.numberOfDiners ? classes.invalid : null}
           />
+
+          {isVisited.numberOfDiners && (
+            <p className={classes.required}>This field is required</p>
+          )}
         </div>
         <div className={classes.seatingOptions}>
           <p className={classes["seatingOptions__title"]}>seating options:</p>
@@ -279,7 +294,7 @@ function BookingForm({ availableTimes, availabilityCheck }) {
             id="comments"
             cols="30"
             rows="3"
-            placeholder="Your comments"
+            placeholder="comments"
             value={bookTable.comments}
             onChange={inputHandler}
             maxLength={150}
