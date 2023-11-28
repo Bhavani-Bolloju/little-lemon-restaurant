@@ -4,7 +4,7 @@ import classes from "./PrimaryButton.module.scss";
 function PrimaryButton(props) {
   return (
     <button
-      disabled={props.disabled || false}
+      // disabled={props.disabled || false}
       onClick={props.onClick}
       className={classes.btn}
       aria-label={props.label || "button"}

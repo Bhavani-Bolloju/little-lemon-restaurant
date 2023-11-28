@@ -31,6 +31,16 @@ function BookingForm({ availableTimes, availabilityCheck }) {
     lastName: ""
   });
 
+  const [isVisited, setIsVisited] = useState({
+    selectedDate: false,
+    selectedTime: false,
+    occasion: false,
+    numberOfDiners: false,
+    // seatingOption: false,
+    firstName: false,
+    lastName: false
+  });
+
   const navigate = useNavigate();
 
   const inputHandler = function (e) {
@@ -51,7 +61,40 @@ function BookingForm({ availableTimes, availabilityCheck }) {
     setBookTable((prev) => {
       return { ...prev, [e.target.name]: e.target.value };
     });
+
+    if (
+      isVisited[e.target.name] !== "seatingOption" &&
+      isVisited[e.target.name]
+    ) {
+      setIsVisited((prev) => {
+        return {
+          ...prev,
+          [e.target.name]: false
+        };
+      });
+    }
+
+    // console.log(isVisited[e.target.value]);
   };
+
+  const visitHandler = function (e) {
+    const key = e.target.name;
+
+    // if (e.target.vale)
+
+    console.log(e.target.name);
+
+    if (e.target.value.trim().length === 0) {
+      setIsVisited((prev) => {
+        return {
+          ...prev,
+          [key]: true
+        };
+      });
+    }
+  };
+
+  // console.log(isVisited);
 
   const formSubmitHandler = async function (e) {
     e.preventDefault();
@@ -84,19 +127,6 @@ function BookingForm({ availableTimes, availabilityCheck }) {
     });
   };
 
-  let isDisabled = true;
-
-  if (
-    bookTable.selectedDate.trim() !== "" &&
-    bookTable.selectedTime.trim() !== "" &&
-    bookTable.seatingOption.trim() !== "" &&
-    bookTable.numberOfDiners > 0 &&
-    bookTable.comments.trim() !== "" &&
-    bookTable.occasion.trim() !== ""
-  ) {
-    isDisabled = false;
-  }
-
   return (
     <form className={classes.bookingForm} onSubmit={formSubmitHandler}>
       <div className={classes["bookingForm__container"]}>
@@ -113,6 +143,8 @@ function BookingForm({ availableTimes, availabilityCheck }) {
             value={bookTable.firstName}
             onChange={inputHandler}
             placeholder="Your First Name"
+            onBlur={visitHandler}
+            className={isVisited.firstName ? classes.invalid : null}
           />
         </div>
         <div className={classes["input__controls"]}>
@@ -128,6 +160,8 @@ function BookingForm({ availableTimes, availabilityCheck }) {
             value={bookTable.lastName}
             onChange={inputHandler}
             placeholder="Your Last Name"
+            onBlur={visitHandler}
+            className={isVisited.lastName ? classes.invalid : null}
           />
         </div>
         <div className={classes["input__controls"]}>
@@ -143,6 +177,8 @@ function BookingForm({ availableTimes, availabilityCheck }) {
             required
             value={bookTable.selectedDate}
             onChange={inputHandler}
+            onBlur={visitHandler}
+            className={isVisited.selectedDate ? classes.invalid : null}
           />
         </div>
         <div className={classes["input__controls"]}>
@@ -156,6 +192,8 @@ function BookingForm({ availableTimes, availabilityCheck }) {
             required
             value={bookTable.selectedTime}
             onChange={inputHandler}
+            onBlur={visitHandler}
+            className={isVisited.selectedTime ? classes.invalid : null}
           >
             <option value="" disabled>
               select an option
@@ -179,8 +217,12 @@ function BookingForm({ availableTimes, availabilityCheck }) {
             onChange={inputHandler}
             value={bookTable.occasion}
             required
+            onBlur={visitHandler}
+            className={isVisited.occasion ? classes.invalid : null}
           >
-            <option value=""></option>
+            <option value="" disabled>
+              choose an occasion
+            </option>
             <option value="birthday">Birthday</option>
             <option value="engagement">Engagement</option>
             <option value="anniversary">Anniversary</option>
@@ -201,6 +243,8 @@ function BookingForm({ availableTimes, availabilityCheck }) {
             value={bookTable.numberOfDiners}
             onChange={inputHandler}
             required
+            onBlur={visitHandler}
+            className={isVisited.numberOfDiners ? classes.invalid : null}
           />
         </div>
         <div className={classes.seatingOptions}>
@@ -245,7 +289,7 @@ function BookingForm({ availableTimes, availabilityCheck }) {
           </p>
         </div>
 
-        <PrimaryButton disabled={isDisabled} label="submit form">
+        <PrimaryButton label="submit form">
           confirm your reservation
         </PrimaryButton>
       </div>

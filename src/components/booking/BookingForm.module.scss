@@ -70,6 +70,10 @@
     background-color: var(--color-input-field);
     border-bottom: 1px solid var(--border-color);
     flex-grow: 1;
+
+    &.invalid {
+      border-bottom: 1px solid #f10606;
+    }
   }
 }
 
